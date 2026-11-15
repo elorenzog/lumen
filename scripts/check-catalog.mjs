@@ -1,0 +1,11 @@
+import { build } from 'esbuild';
+import { createRequire } from 'node:module';
+import { writeFile } from 'node:fs/promises';
+await build({entryPoints:['electron/catalog.ts'],bundle:true,platform:'node',format:'cjs',outfile:'test-results/catalog-check.cjs'});
+const require=createRequire(import.meta.url);
+const {catalog,downloadBible}=require('../test-results/catalog-check.cjs');
+const entries=await catalog();console.log(entries.map(entry=>({id:entry.id,name:entry.name,license:entry.license})));
+let count=0;
+const bible=await downloadBible('spa_bll',()=>{count++;if(count%12===0)console.log(`Libros recibidos: ${count}`);});
+console.log({translation:bible.name,verses:bible.verses.length,john:bible.verses.find(v=>v.book===43&&v.chapter===3&&v.verse===16),provenance:bible.provenance});
+await writeFile('resources/bll.json',JSON.stringify(bible));

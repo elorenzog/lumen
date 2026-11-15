@@ -1,0 +1,2115 @@
+{
+  "version": 1,
+  "edition": "1962",
+  "source": "https://himnarioantiguo.advenz.com/",
+  "entries": [
+    {
+      "number": 1,
+      "title": "Cantad alegres al Señor"
+    },
+    {
+      "number": 2,
+      "title": "Da Gloria Al Señor"
+    },
+    {
+      "number": 3,
+      "title": "¡Santo! ¡Santo! ¡Santo!"
+    },
+    {
+      "number": 4,
+      "title": "¡Alabadle!"
+    },
+    {
+      "number": 5,
+      "title": "A nuestro Padre Dios"
+    },
+    {
+      "number": 6,
+      "title": "De mi amante Salvador"
+    },
+    {
+      "number": 7,
+      "title": "Venid, con cánticos venid"
+    },
+    {
+      "number": 8,
+      "title": "Aquí reunidos"
+    },
+    {
+      "number": 9,
+      "title": "En Sion Jesús Hoy Reina"
+    },
+    {
+      "number": 10,
+      "title": "Engrandecido sea Dios"
+    },
+    {
+      "number": 11,
+      "title": "Unidos en espíritu"
+    },
+    {
+      "number": 12,
+      "title": "¡Tu nombre es dulce, buen Jesús!"
+    },
+    {
+      "number": 13,
+      "title": "Oh Dios, mi soberano Rey"
+    },
+    {
+      "number": 14,
+      "title": "Oye la voz, Señor"
+    },
+    {
+      "number": 15,
+      "title": "En espíritu unidos"
+    },
+    {
+      "number": 16,
+      "title": "Alza tu Canto"
+    },
+    {
+      "number": 17,
+      "title": "A Cristo coronad"
+    },
+    {
+      "number": 18,
+      "title": "¡Suenen dulces himnos!"
+    },
+    {
+      "number": 19,
+      "title": "Loámoste, ¡oh Dios!"
+    },
+    {
+      "number": 20,
+      "title": "Ved a Cristo"
+    },
+    {
+      "number": 21,
+      "title": "Cristo, Señor"
+    },
+    {
+      "number": 22,
+      "title": "Alabanza sin cesar"
+    },
+    {
+      "number": 23,
+      "title": "Oh Padre, eterno Dios"
+    },
+    {
+      "number": 24,
+      "title": "¡Oh Dios, mi soberano Rey!"
+    },
+    {
+      "number": 25,
+      "title": "Ven a las aguas vivas, ven"
+    },
+    {
+      "number": 26,
+      "title": "Señor Jesús, supremo Rey"
+    },
+    {
+      "number": 27,
+      "title": "¡Oh Pastor Divino, Escucha!"
+    },
+    {
+      "number": 28,
+      "title": "Tu pueblo Jubiloso"
+    },
+    {
+      "number": 29,
+      "title": "Ven, Oh Todopoderoso"
+    },
+    {
+      "number": 30,
+      "title": "Imploramos tu presencia"
+    },
+    {
+      "number": 31,
+      "title": "Del Culto el tiempo llega"
+    },
+    {
+      "number": 32,
+      "title": "Despide hoy tu grey"
+    },
+    {
+      "number": 33,
+      "title": "Oh, Padre de la humanidad"
+    },
+    {
+      "number": 34,
+      "title": "Oh Señor, ven a bendecirnos"
+    },
+    {
+      "number": 35,
+      "title": "Después, Señor"
+    },
+    {
+      "number": 36,
+      "title": "Dios os guarde"
+    },
+    {
+      "number": 37,
+      "title": "Todos juntos tributemos"
+    },
+    {
+      "number": 38,
+      "title": "Por la Mañana"
+    },
+    {
+      "number": 39,
+      "title": "Del alba al despertar"
+    },
+    {
+      "number": 40,
+      "title": "Dulce es la canción"
+    },
+    {
+      "number": 41,
+      "title": "Las Faenas terminadas"
+    },
+    {
+      "number": 42,
+      "title": "Condúceme, Maestro"
+    },
+    {
+      "number": 43,
+      "title": "Oh Dios, si he ofendido un corazón"
+    },
+    {
+      "number": 44,
+      "title": "Cristo, ya la noche cierra"
+    },
+    {
+      "number": 45,
+      "title": "Baja el sol"
+    },
+    {
+      "number": 46,
+      "title": "Guárdanos, oh Cristo"
+    },
+    {
+      "number": 47,
+      "title": "Nuestro sol se pone ya"
+    },
+    {
+      "number": 48,
+      "title": "Señor Jesús, el día ya se fue"
+    },
+    {
+      "number": 49,
+      "title": "En el curso de este día"
+    },
+    {
+      "number": 50,
+      "title": "Óyeme, Jesús divino"
+    },
+    {
+      "number": 51,
+      "title": "Despídenos con tu bendición"
+    },
+    {
+      "number": 52,
+      "title": "¡Oh Dios, que oyes cada oración"
+    },
+    {
+      "number": 53,
+      "title": "Padre reunidos"
+    },
+    {
+      "number": 54,
+      "title": "Gloria demos al padre"
+    },
+    {
+      "number": 55,
+      "title": "A dios, el Padre celestial"
+    },
+    {
+      "number": 56,
+      "title": "Gloria sea al Padre"
+    },
+    {
+      "number": 57,
+      "title": "Jehová está en el Santo Monte"
+    },
+    {
+      "number": 58,
+      "title": "Jehová te bendiga"
+    },
+    {
+      "number": 59,
+      "title": "Jehová en el alto cielo"
+    },
+    {
+      "number": 60,
+      "title": "¡Hosanna!"
+    },
+    {
+      "number": 61,
+      "title": "Grande es el Amor Divino"
+    },
+    {
+      "number": 62,
+      "title": "¡Oh Amor de Dios!"
+    },
+    {
+      "number": 63,
+      "title": "Mi Dios me Ama"
+    },
+    {
+      "number": 64,
+      "title": "Hay anchura en su clemencia"
+    },
+    {
+      "number": 65,
+      "title": "Dios de luz y Gloria Excelsa"
+    },
+    {
+      "number": 66,
+      "title": "Omnisapiente Dios"
+    },
+    {
+      "number": 67,
+      "title": "Señor, mi Dios"
+    },
+    {
+      "number": 68,
+      "title": "Mi creador, mi rey"
+    },
+    {
+      "number": 69,
+      "title": "Al Rey, Adorad"
+    },
+    {
+      "number": 70,
+      "title": "Santo, Santo, Santo"
+    },
+    {
+      "number": 71,
+      "title": "Load al Padre"
+    },
+    {
+      "number": 72,
+      "title": "Eterno Dios, mi Creador"
+    },
+    {
+      "number": 73,
+      "title": "Padre, Oh Padre, ven a guiarnos"
+    },
+    {
+      "number": 74,
+      "title": "A ti, glorioso Dios"
+    },
+    {
+      "number": 75,
+      "title": "Oh Dios Eterno"
+    },
+    {
+      "number": 76,
+      "title": "¡Cuan grande es Dios!"
+    },
+    {
+      "number": 77,
+      "title": "Yo canto el poder de Dios"
+    },
+    {
+      "number": 78,
+      "title": "El mundo es de mi Dios"
+    },
+    {
+      "number": 79,
+      "title": "Mirando al cielo"
+    },
+    {
+      "number": 80,
+      "title": "¿Sabes cuántos?"
+    },
+    {
+      "number": 81,
+      "title": "¡Señor, yo te conozco!"
+    },
+    {
+      "number": 82,
+      "title": "Los heraldos celestiales"
+    },
+    {
+      "number": 83,
+      "title": "Al mundo paz"
+    },
+    {
+      "number": 84,
+      "title": "Se oye un canto en alta esfera"
+    },
+    {
+      "number": 85,
+      "title": "Venid, pastorcillos"
+    },
+    {
+      "number": 86,
+      "title": "Venid Pequeñuelos"
+    },
+    {
+      "number": 87,
+      "title": "Noche de Paz"
+    },
+    {
+      "number": 88,
+      "title": "¿Qué significa ese rumor?"
+    },
+    {
+      "number": 89,
+      "title": "Los tiernos años"
+    },
+    {
+      "number": 90,
+      "title": "Hubo uno que quiso"
+    },
+    {
+      "number": 91,
+      "title": "Al Contemplar la excelsa cruz"
+    },
+    {
+      "number": 92,
+      "title": "Jamás podrá alguien separarnos"
+    },
+    {
+      "number": 93,
+      "title": "Sangró mi soberano Dios"
+    },
+    {
+      "number": 94,
+      "title": "Un Día"
+    },
+    {
+      "number": 95,
+      "title": "Rostro Divino"
+    },
+    {
+      "number": 96,
+      "title": "En el monte Calvario"
+    },
+    {
+      "number": 97,
+      "title": "Por fe contemplo al buen Jesús"
+    },
+    {
+      "number": 98,
+      "title": "Ved al divino Salvador"
+    },
+    {
+      "number": 99,
+      "title": "¡Dulces Momentos!"
+    },
+    {
+      "number": 100,
+      "title": "Jesús resucitado"
+    },
+    {
+      "number": 101,
+      "title": "El Señor resucitó"
+    },
+    {
+      "number": 102,
+      "title": "La Tumba le encero"
+    },
+    {
+      "number": 103,
+      "title": "Jesús por mí su vida dio"
+    },
+    {
+      "number": 104,
+      "title": "Cristo ha resucitado"
+    },
+    {
+      "number": 105,
+      "title": "¿Le importará a Jesús?"
+    },
+    {
+      "number": 106,
+      "title": "¿Hay aquí quien no ayude?"
+    },
+    {
+      "number": 107,
+      "title": "Amor que no me dejaras"
+    },
+    {
+      "number": 108,
+      "title": "¡Oh, cuán dulce es la promesa!"
+    },
+    {
+      "number": 109,
+      "title": "Amigo Fiel es Cristo"
+    },
+    {
+      "number": 110,
+      "title": "Ama el Pastor sus ovejas"
+    },
+    {
+      "number": 111,
+      "title": "Ni en la tierra"
+    },
+    {
+      "number": 112,
+      "title": "Dime la antigua historia"
+    },
+    {
+      "number": 113,
+      "title": "Como ovejas disfrutamos"
+    },
+    {
+      "number": 114,
+      "title": "Un Buen amigó tengo yo"
+    },
+    {
+      "number": 115,
+      "title": "Hay un lugar do quiero estar"
+    },
+    {
+      "number": 116,
+      "title": "Hay quien vela"
+    },
+    {
+      "number": 117,
+      "title": "Aunque sean como grana"
+    },
+    {
+      "number": 118,
+      "title": "Dios tu tristeza entiende"
+    },
+    {
+      "number": 119,
+      "title": "Cristo es el mejor amigo"
+    },
+    {
+      "number": 120,
+      "title": "Fija tus ojos en Cristo"
+    },
+    {
+      "number": 121,
+      "title": "Por sobre el goce terrenal"
+    },
+    {
+      "number": 122,
+      "title": "Amoroso salvador"
+    },
+    {
+      "number": 123,
+      "title": "Me dice el Salvador"
+    },
+    {
+      "number": 124,
+      "title": "La tierna voz del Salvador"
+    },
+    {
+      "number": 125,
+      "title": "Abrigadas y salvas en el redil"
+    },
+    {
+      "number": 126,
+      "title": "Ven a Cristo"
+    },
+    {
+      "number": 127,
+      "title": "Como Jesús no hay otro amigo"
+    },
+    {
+      "number": 128,
+      "title": "Huye cual ave"
+    },
+    {
+      "number": 129,
+      "title": "Canto el gran amor"
+    },
+    {
+      "number": 130,
+      "title": "Para mí, tan pecador"
+    },
+    {
+      "number": 131,
+      "title": "En Cristo hallo amigo"
+    },
+    {
+      "number": 132,
+      "title": "Las maravillas de el amor"
+    },
+    {
+      "number": 133,
+      "title": "Cuando estés cansado y abatido"
+    },
+    {
+      "number": 134,
+      "title": "Dios tanto amo al mundo"
+    },
+    {
+      "number": 135,
+      "title": "Es Jesucristo la vida, la luz"
+    },
+    {
+      "number": 136,
+      "title": "Al fin conocí más de cerca a Jesús"
+    },
+    {
+      "number": 137,
+      "title": "Cual Mirra Fragante"
+    },
+    {
+      "number": 138,
+      "title": "Dominará Jesús"
+    },
+    {
+      "number": 139,
+      "title": "No hay un nombre en esta tierra"
+    },
+    {
+      "number": 140,
+      "title": "Venid, cantad a nuestro Señor"
+    },
+    {
+      "number": 141,
+      "title": "A dios sea Gloria"
+    },
+    {
+      "number": 142,
+      "title": "Si acaso te dejo, Jesús"
+    },
+    {
+      "number": 143,
+      "title": "Desde el glorioso trono"
+    },
+    {
+      "number": 144,
+      "title": "Te quiero, te quiero"
+    },
+    {
+      "number": 145,
+      "title": "De Jesús el nombre invoca"
+    },
+    {
+      "number": 146,
+      "title": "Junto a la Cruz"
+    },
+    {
+      "number": 147,
+      "title": "¡Oh qué Salvador!"
+    },
+    {
+      "number": 148,
+      "title": "Digno eres, oh Jesús"
+    },
+    {
+      "number": 149,
+      "title": "A cristo doy mi canto"
+    },
+    {
+      "number": 150,
+      "title": "Cristo, si gozo al pecho da"
+    },
+    {
+      "number": 151,
+      "title": "¡Cuán dulce el nombre de Jesús!"
+    },
+    {
+      "number": 152,
+      "title": "Hay una fuente sin igual"
+    },
+    {
+      "number": 153,
+      "title": "Oh buen Señor, velada está"
+    },
+    {
+      "number": 154,
+      "title": "Con acentos de Alegría"
+    },
+    {
+      "number": 155,
+      "title": "Cristo eres justo Rey"
+    },
+    {
+      "number": 156,
+      "title": "Venid, cantad de gozo en plenitud"
+    },
+    {
+      "number": 157,
+      "title": "Jesús bendito, Salvador"
+    },
+    {
+      "number": 158,
+      "title": "Dad gloria al cordero Rey"
+    },
+    {
+      "number": 159,
+      "title": "¡Oh si pudiera yo contar!"
+    },
+    {
+      "number": 160,
+      "title": "Tiempo es de que en gloria venga Cristo"
+    },
+    {
+      "number": 161,
+      "title": "Amanece ya la mañana de oro"
+    },
+    {
+      "number": 162,
+      "title": "Viene otra vez nuestro salvador"
+    },
+    {
+      "number": 163,
+      "title": "¡Oh! cuán gratas las nuevas"
+    },
+    {
+      "number": 164,
+      "title": "Abre tu corazón"
+    },
+    {
+      "number": 165,
+      "title": "En presencia estar de cristo"
+    },
+    {
+      "number": 166,
+      "title": "Hijo del reino"
+    },
+    {
+      "number": 167,
+      "title": "Guarda, dinos si la noche"
+    },
+    {
+      "number": 168,
+      "title": "El amanecer del día"
+    },
+    {
+      "number": 169,
+      "title": "Cristo viene"
+    },
+    {
+      "number": 170,
+      "title": "Jesús pronto volverá"
+    },
+    {
+      "number": 171,
+      "title": "Yo espero la mañana"
+    },
+    {
+      "number": 172,
+      "title": "El Rey que viene"
+    },
+    {
+      "number": 173,
+      "title": "¡Vendrá el Señor!"
+    },
+    {
+      "number": 174,
+      "title": "Siervos de Dios, la trompeta tocad"
+    },
+    {
+      "number": 175,
+      "title": "¿Quién en deslumbrante gloria?"
+    },
+    {
+      "number": 176,
+      "title": "Cuando suene la trompeta"
+    },
+    {
+      "number": 177,
+      "title": "Se pone el fulgurante sol"
+    },
+    {
+      "number": 178,
+      "title": "La segunda venida de Cristo"
+    },
+    {
+      "number": 179,
+      "title": "¿Has oído el mensaje?"
+    },
+    {
+      "number": 180,
+      "title": "¿Será al albor?"
+    },
+    {
+      "number": 181,
+      "title": "Estando a orillas del Jordán"
+    },
+    {
+      "number": 182,
+      "title": "Cantará, cantará"
+    },
+    {
+      "number": 183,
+      "title": "Promesa dulce"
+    },
+    {
+      "number": 184,
+      "title": "Por mil arpas"
+    },
+    {
+      "number": 185,
+      "title": "Hay un mundo feliz mas allá"
+    },
+    {
+      "number": 186,
+      "title": "Bellas canciones perennes"
+    },
+    {
+      "number": 187,
+      "title": "Santo Espíritu de Cristo"
+    },
+    {
+      "number": 188,
+      "title": "La nueva proclamad"
+    },
+    {
+      "number": 189,
+      "title": "Danos el fuego"
+    },
+    {
+      "number": 190,
+      "title": "Dios nos ha dado promesa"
+    },
+    {
+      "number": 191,
+      "title": "Ven, Espíritu eterno"
+    },
+    {
+      "number": 192,
+      "title": "Abre mis ojos a la luz"
+    },
+    {
+      "number": 193,
+      "title": "Alumbrante Espíritu"
+    },
+    {
+      "number": 194,
+      "title": "Desciende, Espíritu de amor"
+    },
+    {
+      "number": 195,
+      "title": "Ven a nuestras almas"
+    },
+    {
+      "number": 196,
+      "title": "¡Cuán firme cimiento!"
+    },
+    {
+      "number": 197,
+      "title": "Dadme la Biblia"
+    },
+    {
+      "number": 198,
+      "title": "¡Santa Biblia!"
+    },
+    {
+      "number": 199,
+      "title": "Oh, Cantádmelas otra vez"
+    },
+    {
+      "number": 200,
+      "title": "Padre, tu Palabra es mi delicia"
+    },
+    {
+      "number": 201,
+      "title": "La Biblia nos habla de Cristo"
+    },
+    {
+      "number": 202,
+      "title": "En el mundo turbulento"
+    },
+    {
+      "number": 203,
+      "title": "Hoy llega a mis oídos"
+    },
+    {
+      "number": 204,
+      "title": "Ven, pródigo perdido, ven"
+    },
+    {
+      "number": 205,
+      "title": "A tu puerta Cristo está"
+    },
+    {
+      "number": 206,
+      "title": "Tierno y amante, Jesús nos invita"
+    },
+    {
+      "number": 207,
+      "title": "Cristo, el Pastor divino"
+    },
+    {
+      "number": 208,
+      "title": "¿Te sientes casi resuelto?"
+    },
+    {
+      "number": 209,
+      "title": "Mientras Jesús te llama"
+    },
+    {
+      "number": 210,
+      "title": "Con voz benigna te llama Jesús"
+    },
+    {
+      "number": 211,
+      "title": "Allá la puerta franca está"
+    },
+    {
+      "number": 212,
+      "title": "Francas las puertas encontrarán"
+    },
+    {
+      "number": 213,
+      "title": "Bienvenida da Jesús"
+    },
+    {
+      "number": 214,
+      "title": "A Jesucristo ven sin tardar"
+    },
+    {
+      "number": 215,
+      "title": "En el hogar do nunca habrá"
+    },
+    {
+      "number": 216,
+      "title": "¿Temes que en la lucha?"
+    },
+    {
+      "number": 217,
+      "title": "Oí la voz del buen Jesús"
+    },
+    {
+      "number": 218,
+      "title": "Por mí intercede"
+    },
+    {
+      "number": 219,
+      "title": "Oí la voz del Salvador"
+    },
+    {
+      "number": 220,
+      "title": "Del trono celestial"
+    },
+    {
+      "number": 221,
+      "title": "Dios al prodigo llama"
+    },
+    {
+      "number": 222,
+      "title": "Tan triste y tan lejos de Dios"
+    },
+    {
+      "number": 223,
+      "title": "En extraña tierra"
+    },
+    {
+      "number": 224,
+      "title": "Preste oído. el humano"
+    },
+    {
+      "number": 225,
+      "title": "Venid a mí los tristes"
+    },
+    {
+      "number": 226,
+      "title": "Yo escucho, buen Jesús"
+    },
+    {
+      "number": 227,
+      "title": "Ven a la fuente de vida"
+    },
+    {
+      "number": 228,
+      "title": "Un hombre llegóse de noche a Jesús"
+    },
+    {
+      "number": 229,
+      "title": "De Dios vagaba lejos yo"
+    },
+    {
+      "number": 230,
+      "title": "Cuando vengas"
+    },
+    {
+      "number": 231,
+      "title": "Te ruego, oh Dios"
+    },
+    {
+      "number": 232,
+      "title": "¡Oh mi Dios!"
+    },
+    {
+      "number": 233,
+      "title": "En todo recio vendaval"
+    },
+    {
+      "number": 234,
+      "title": "Yo confío en Jesús"
+    },
+    {
+      "number": 235,
+      "title": "Cuando sopla airada la tempestad"
+    },
+    {
+      "number": 236,
+      "title": "Roca de la eternidad"
+    },
+    {
+      "number": 237,
+      "title": "Te quiero, mi Señor"
+    },
+    {
+      "number": 238,
+      "title": "Al andar con Jesús"
+    },
+    {
+      "number": 239,
+      "title": "A cualquiera parte"
+    },
+    {
+      "number": 240,
+      "title": "Mi fe contempla a ti"
+    },
+    {
+      "number": 241,
+      "title": "Jesús es mi luz"
+    },
+    {
+      "number": 242,
+      "title": "Eterna Roca es mi Jesús"
+    },
+    {
+      "number": 243,
+      "title": "Confió en Jesucristo"
+    },
+    {
+      "number": 244,
+      "title": "Cuando te quiero"
+    },
+    {
+      "number": 245,
+      "title": "¡Oh! salvo en la Roca"
+    },
+    {
+      "number": 246,
+      "title": "Señor en ti confíe"
+    },
+    {
+      "number": 247,
+      "title": "Cristo me ayuda por él a vivir"
+    },
+    {
+      "number": 248,
+      "title": "Bajo sus alas"
+    },
+    {
+      "number": 249,
+      "title": "Todas las promesas"
+    },
+    {
+      "number": 250,
+      "title": "¿Oh! tenga yo la ardiente fe"
+    },
+    {
+      "number": 251,
+      "title": "Oh peregrino ignoto, ven"
+    },
+    {
+      "number": 252,
+      "title": "Cuando en la lucha"
+    },
+    {
+      "number": 253,
+      "title": "¿Qué me importan?"
+    },
+    {
+      "number": 254,
+      "title": "¡Oh, Cuan dulce es fiar en Cristo!"
+    },
+    {
+      "number": 255,
+      "title": "Castillo fuerte es nuestro Dios"
+    },
+    {
+      "number": 256,
+      "title": "Por la justicia de Jesús"
+    },
+    {
+      "number": 257,
+      "title": "Padre, yo vengo a ti"
+    },
+    {
+      "number": 258,
+      "title": "A la cruz de Cristo voy"
+    },
+    {
+      "number": 259,
+      "title": "Que mi vida entera esté"
+    },
+    {
+      "number": 260,
+      "title": "Cúmplase, oh Cristo, tu voluntad"
+    },
+    {
+      "number": 261,
+      "title": "Tuyo quiero ser"
+    },
+    {
+      "number": 262,
+      "title": "Tal como soy"
+    },
+    {
+      "number": 263,
+      "title": "Deberá Jesús mi cruz llevar"
+    },
+    {
+      "number": 264,
+      "title": "Padre, a tus pies me postro"
+    },
+    {
+      "number": 265,
+      "title": "Yo te seguiré"
+    },
+    {
+      "number": 266,
+      "title": "Dejo el mundo"
+    },
+    {
+      "number": 267,
+      "title": "Mí espíritu, alma y cuerpo"
+    },
+    {
+      "number": 268,
+      "title": "Señor, Dios poderoso"
+    },
+    {
+      "number": 269,
+      "title": "Tuyo soy, Jesús"
+    },
+    {
+      "number": 270,
+      "title": "Anhelo ser limpio"
+    },
+    {
+      "number": 271,
+      "title": "Oh Cristo, te adoro"
+    },
+    {
+      "number": 272,
+      "title": "Jesús, yo he prometido"
+    },
+    {
+      "number": 273,
+      "title": "Tú dejaste tu trono"
+    },
+    {
+      "number": 274,
+      "title": "De esclavitud"
+    },
+    {
+      "number": 275,
+      "title": "Junto a la cruz de Cristo"
+    },
+    {
+      "number": 276,
+      "title": "Mi amor y vida doy a ti"
+    },
+    {
+      "number": 277,
+      "title": "Salvador, a ti me rindo"
+    },
+    {
+      "number": 278,
+      "title": "Al contemplarte, mi Salvador"
+    },
+    {
+      "number": 279,
+      "title": "No yo, sino él"
+    },
+    {
+      "number": 280,
+      "title": "¡Oh Jesús!, mi cruz levanto"
+    },
+    {
+      "number": 281,
+      "title": "Fuente de la vida eterna"
+    },
+    {
+      "number": 282,
+      "title": "Entra en este corazón"
+    },
+    {
+      "number": 283,
+      "title": "Moro yo en las alturas"
+    },
+    {
+      "number": 284,
+      "title": "Rey de mi vida"
+    },
+    {
+      "number": 285,
+      "title": "Perdido, fui a mi Jesús"
+    },
+    {
+      "number": 286,
+      "title": "Andando en la luz de Dios"
+    },
+    {
+      "number": 287,
+      "title": "Perdido fui al buen Jesús"
+    },
+    {
+      "number": 288,
+      "title": "Los tesoros del mundo"
+    },
+    {
+      "number": 289,
+      "title": "Por fe en Cristo el Redentor"
+    },
+    {
+      "number": 290,
+      "title": "¿Quieres ser salvo de toda maldad?"
+    },
+    {
+      "number": 291,
+      "title": "Todos los que tengan sed"
+    },
+    {
+      "number": 292,
+      "title": "Al Calvario, solo, Jesús ascendió"
+    },
+    {
+      "number": 293,
+      "title": "¿Qué me puede dar perdón?"
+    },
+    {
+      "number": 294,
+      "title": "Comprando por sangre por Cristo"
+    },
+    {
+      "number": 295,
+      "title": "En Jesús por fe confío"
+    },
+    {
+      "number": 296,
+      "title": "Una es, Señor, mi petición"
+    },
+    {
+      "number": 297,
+      "title": "¡Oh Jesús, Señor divino!"
+    },
+    {
+      "number": 298,
+      "title": "Hay vida en mirar"
+    },
+    {
+      "number": 299,
+      "title": "Lejos de mi Padre Dios"
+    },
+    {
+      "number": 300,
+      "title": "Ni fama, mi ciencia"
+    },
+    {
+      "number": 301,
+      "title": "Al cielo voy"
+    },
+    {
+      "number": 302,
+      "title": "¿Quién es aquel que viene?"
+    },
+    {
+      "number": 303,
+      "title": "Cristo es mi amante Salvador"
+    },
+    {
+      "number": 304,
+      "title": "Mi Redentor, el Rey de gloria"
+    },
+    {
+      "number": 305,
+      "title": "Cuando mi lucha toque a su final"
+    },
+    {
+      "number": 306,
+      "title": "Entonad un himno que alegre el corazón"
+    },
+    {
+      "number": 307,
+      "title": "Del Padre los bienes"
+    },
+    {
+      "number": 308,
+      "title": "En el seguro puerto"
+    },
+    {
+      "number": 309,
+      "title": "Si al vislumbrar en el mundo dichoso"
+    },
+    {
+      "number": 310,
+      "title": "Cuán rato es con amigos vernos"
+    },
+    {
+      "number": 311,
+      "title": "Solemne me es saber"
+    },
+    {
+      "number": 312,
+      "title": "¡A la luz!"
+    },
+    {
+      "number": 313,
+      "title": "Más allá, en ¡a excelsa patria"
+    },
+    {
+      "number": 314,
+      "title": "En la mansión de mi Señor"
+    },
+    {
+      "number": 315,
+      "title": "Allá sobre montes"
+    },
+    {
+      "number": 316,
+      "title": "Cuánto anhelo llegar"
+    },
+    {
+      "number": 317,
+      "title": "No está en la tierra mí hogar"
+    },
+    {
+      "number": 318,
+      "title": "Cuando aquí de la vida"
+    },
+    {
+      "number": 319,
+      "title": "Un día yo he de faltar"
+    },
+    {
+      "number": 320,
+      "title": "Arrolladas las neblinas"
+    },
+    {
+      "number": 321,
+      "title": "Perfecta paz"
+    },
+    {
+      "number": 322,
+      "title": "Con gozo canto al Señor"
+    },
+    {
+      "number": 323,
+      "title": "En Jesucristo, mártir de paz"
+    },
+    {
+      "number": 324,
+      "title": "¡Oh buen maestro despierta!"
+    },
+    {
+      "number": 325,
+      "title": "Llena de toso"
+    },
+    {
+      "number": 326,
+      "title": "En Cristo feliz es mi alma"
+    },
+    {
+      "number": 327,
+      "title": "Salvo en los tiernos brazos"
+    },
+    {
+      "number": 328,
+      "title": "Percibe mi alma un son"
+    },
+    {
+      "number": 329,
+      "title": "Grato es contar la historia"
+    },
+    {
+      "number": 330,
+      "title": "¡Feliz el día en que escogí!"
+    },
+    {
+      "number": 331,
+      "title": "En el seno de mi alma"
+    },
+    {
+      "number": 332,
+      "title": "Con sin igual amor"
+    },
+    {
+      "number": 333,
+      "title": "Dicha grande"
+    },
+    {
+      "number": 334,
+      "title": "Gran gozo hay en mi alma hoy"
+    },
+    {
+      "number": 335,
+      "title": "Dulce comunión"
+    },
+    {
+      "number": 336,
+      "title": "Mi Redentor es Cristo"
+    },
+    {
+      "number": 337,
+      "title": "Cristo, tú prometes"
+    },
+    {
+      "number": 338,
+      "title": "¡Silencio! ¡silencio!"
+    },
+    {
+      "number": 339,
+      "title": "Primero oré por luz"
+    },
+    {
+      "number": 340,
+      "title": "Bendiciones ricas"
+    },
+    {
+      "number": 341,
+      "title": "Aparte del mundo"
+    },
+    {
+      "number": 342,
+      "title": "Sed puros y santos"
+    },
+    {
+      "number": 343,
+      "title": "A mí venid"
+    },
+    {
+      "number": 344,
+      "title": "Dulce Oración"
+    },
+    {
+      "number": 345,
+      "title": "Jesús, te necesito"
+    },
+    {
+      "number": 346,
+      "title": "Cuando lleguen pruebas"
+    },
+    {
+      "number": 347,
+      "title": "Sol de mi ser"
+    },
+    {
+      "number": 348,
+      "title": "Quiero, Jesús, contigo andar"
+    },
+    {
+      "number": 349,
+      "title": "¡Oh, qué amigo nos es Cristo!"
+    },
+    {
+      "number": 350,
+      "title": "Marchare en la divina luz"
+    },
+    {
+      "number": 351,
+      "title": "Yo quiero trabajar"
+    },
+    {
+      "number": 352,
+      "title": "Levántate, cristiano"
+    },
+    {
+      "number": 353,
+      "title": "Centinelas del maestro"
+    },
+    {
+      "number": 354,
+      "title": "¡Oh! cuánto necesita"
+    },
+    {
+      "number": 355,
+      "title": "¿Os pusisteis a arar?"
+    },
+    {
+      "number": 356,
+      "title": "Despliegue el cristiano su santa bandera"
+    },
+    {
+      "number": 357,
+      "title": "Soy peregrino aquí"
+    },
+    {
+      "number": 358,
+      "title": "¡El salvavidas!"
+    },
+    {
+      "number": 359,
+      "title": "¡Trabajad! ¡trabajad!"
+    },
+    {
+      "number": 360,
+      "title": "Cerca un alma agobiada está"
+    },
+    {
+      "number": 361,
+      "title": "Esparcid la luz de Cristo"
+    },
+    {
+      "number": 362,
+      "title": "Un día mas por Cristo"
+    },
+    {
+      "number": 363,
+      "title": "¿Quién está por Cristo?"
+    },
+    {
+      "number": 364,
+      "title": "Hoy gozoso medito"
+    },
+    {
+      "number": 365,
+      "title": "Solitarios corazones"
+    },
+    {
+      "number": 366,
+      "title": "Tocad trompeta ya"
+    },
+    {
+      "number": 367,
+      "title": "¿Qué estás haciendo por Cristo?"
+    },
+    {
+      "number": 368,
+      "title": "Ama a tus prójimos"
+    },
+    {
+      "number": 369,
+      "title": "Vivo por Cristo"
+    },
+    {
+      "number": 370,
+      "title": "Muy constante es Jesús"
+    },
+    {
+      "number": 371,
+      "title": "Dame la fe de mi Jesús"
+    },
+    {
+      "number": 372,
+      "title": "Tentado no cedas"
+    },
+    {
+      "number": 373,
+      "title": "Nunca estéis desanimados"
+    },
+    {
+      "number": 374,
+      "title": "Los Hijos del Reino"
+    },
+    {
+      "number": 375,
+      "title": "¡Oh Rey eterno, avanza!"
+    },
+    {
+      "number": 376,
+      "title": "¡Oh, hermanos!"
+    },
+    {
+      "number": 377,
+      "title": "No te dé temor"
+    },
+    {
+      "number": 378,
+      "title": "¡Firmes y adelante!"
+    },
+    {
+      "number": 379,
+      "title": "¡De pie, de pie, cristianos!"
+    },
+    {
+      "number": 380,
+      "title": "Contendamos siempre por nuestra fe"
+    },
+    {
+      "number": 381,
+      "title": "¡Despertad, despertad, oh cristianos!"
+    },
+    {
+      "number": 382,
+      "title": "Aquí mis días ya se van"
+    },
+    {
+      "number": 383,
+      "title": "Sale a la lucha el Salvador"
+    },
+    {
+      "number": 384,
+      "title": "Voy al cielo"
+    },
+    {
+      "number": 385,
+      "title": "Los que aman al Señor"
+    },
+    {
+      "number": 386,
+      "title": "Peregrinos en desierto"
+    },
+    {
+      "number": 387,
+      "title": "La senda ancha dejaré"
+    },
+    {
+      "number": 388,
+      "title": "Soy peregrino aquí (2)"
+    },
+    {
+      "number": 389,
+      "title": "El camino es escabroso"
+    },
+    {
+      "number": 390,
+      "title": "Busquemos la patria"
+    },
+    {
+      "number": 391,
+      "title": "¿Muy lejos el hogar está?"
+    },
+    {
+      "number": 392,
+      "title": "Hay tan solo dos sendas"
+    },
+    {
+      "number": 393,
+      "title": "Aprendí el gran secreto"
+    },
+    {
+      "number": 394,
+      "title": "Puedo oír tu voz llamando"
+    },
+    {
+      "number": 395,
+      "title": "La cruz no es mayor"
+    },
+    {
+      "number": 396,
+      "title": "Meditar en Jesús"
+    },
+    {
+      "number": 397,
+      "title": "A los pies de Jesucristo"
+    },
+    {
+      "number": 398,
+      "title": "Sólo anhelo, Cristo amado"
+    },
+    {
+      "number": 399,
+      "title": "Cristo está conmigo"
+    },
+    {
+      "number": 400,
+      "title": "Ando con Cristo"
+    },
+    {
+      "number": 401,
+      "title": "Concédeme, Jesús, poder"
+    },
+    {
+      "number": 402,
+      "title": "Hoy me llama el mundo en vano"
+    },
+    {
+      "number": 403,
+      "title": "Hay un lugar do quiero estar (2)"
+    },
+    {
+      "number": 404,
+      "title": "Prefiero mí Cristo"
+    },
+    {
+      "number": 405,
+      "title": "¡Oh! ¡Maestro y Salvador!"
+    },
+    {
+      "number": 406,
+      "title": "Más de Jesús"
+    },
+    {
+      "number": 407,
+      "title": "No me pases"
+    },
+    {
+      "number": 408,
+      "title": "Más cerca, oh Dios, de ti"
+    },
+    {
+      "number": 409,
+      "title": "¡Oh! quién pudiera andar con Dios"
+    },
+    {
+      "number": 410,
+      "title": "Mi mano ten"
+    },
+    {
+      "number": 411,
+      "title": "Más santidad dame"
+    },
+    {
+      "number": 412,
+      "title": "Salvador, al bien eterno"
+    },
+    {
+      "number": 413,
+      "title": "Habla, Señor, a mi alma"
+    },
+    {
+      "number": 414,
+      "title": "Cristo, tú eres para mí"
+    },
+    {
+      "number": 415,
+      "title": "Donde me guíe, seguiré"
+    },
+    {
+      "number": 416,
+      "title": "Cristo, mi piloto sé"
+    },
+    {
+      "number": 417,
+      "title": "En brazos del Maestro"
+    },
+    {
+      "number": 418,
+      "title": "¡Siempre el Salvador conmigo!"
+    },
+    {
+      "number": 419,
+      "title": "Cerca, más cerca"
+    },
+    {
+      "number": 420,
+      "title": "Cariñoso Salvador"
+    },
+    {
+      "number": 421,
+      "title": "Nada puede ya faltarme"
+    },
+    {
+      "number": 422,
+      "title": "Divina Luz"
+    },
+    {
+      "number": 423,
+      "title": "Jesús me guía"
+    },
+    {
+      "number": 424,
+      "title": "Nunca desmayes"
+    },
+    {
+      "number": 425,
+      "title": "Cristo, tu voluntad"
+    },
+    {
+      "number": 426,
+      "title": "Alma mía, espera en tu Señor"
+    },
+    {
+      "number": 427,
+      "title": "¿Oyes cómo Jesucristo?"
+    },
+    {
+      "number": 428,
+      "title": "¡Oh Jesús, Pastor divino!"
+    },
+    {
+      "number": 429,
+      "title": "Paso a paso Dios me guía"
+    },
+    {
+      "number": 430,
+      "title": "Si la fe me abandonare"
+    },
+    {
+      "number": 431,
+      "title": "Tengo en Dios un grande amor"
+    },
+    {
+      "number": 432,
+      "title": "Si la carga es pesada"
+    },
+    {
+      "number": 433,
+      "title": "Contigo quiero andar"
+    },
+    {
+      "number": 434,
+      "title": "Guíame, ¡Oh Salvador!"
+    },
+    {
+      "number": 435,
+      "title": "¡Cuán firme es de tu iglesia!"
+    },
+    {
+      "number": 436,
+      "title": "Sagrado es el amor"
+    },
+    {
+      "number": 437,
+      "title": "Oh Dios, escucha con bondad"
+    },
+    {
+      "number": 438,
+      "title": "Iglesia de Cristo"
+    },
+    {
+      "number": 439,
+      "title": "En tu nombre comenzamos"
+    },
+    {
+      "number": 440,
+      "title": "¡Oh, cuánto me eres cara!"
+    },
+    {
+      "number": 441,
+      "title": "Oigo del Señor la voz llamando"
+    },
+    {
+      "number": 442,
+      "title": "En la montaña podrá no ser"
+    },
+    {
+      "number": 443,
+      "title": "Cristo está buscando obreros"
+    },
+    {
+      "number": 444,
+      "title": "Si en valles de peligros"
+    },
+    {
+      "number": 445,
+      "title": "Pronto la noche viene"
+    },
+    {
+      "number": 446,
+      "title": "De heladas cordilleras"
+    },
+    {
+      "number": 447,
+      "title": "Escuchad, Jesús nos dice"
+    },
+    {
+      "number": 448,
+      "title": "¡Ve, ve oh Sion!"
+    },
+    {
+      "number": 449,
+      "title": "¡Señor!, la mies es mucha"
+    },
+    {
+      "number": 450,
+      "title": "Hay lugar en la amplia viña"
+    },
+    {
+      "number": 451,
+      "title": "La historia de Cristo contemos"
+    },
+    {
+      "number": 452,
+      "title": "Escuchamos tu llamada"
+    },
+    {
+      "number": 453,
+      "title": "Jesús está buscando voluntarios hoy"
+    },
+    {
+      "number": 454,
+      "title": "Honra al hombre de valor"
+    },
+    {
+      "number": 455,
+      "title": "Hoy nos toca trabajar"
+    },
+    {
+      "number": 456,
+      "title": "Habla a tu Dios de mañana"
+    },
+    {
+      "number": 457,
+      "title": "¡Oh jóvenes, venid!"
+    },
+    {
+      "number": 458,
+      "title": "Yo tengo gozo"
+    },
+    {
+      "number": 459,
+      "title": "Voluntario del Se"
+    },
+    {
+      "number": 460,
+      "title": "Corazones siempre alegres"
+    },
+    {
+      "number": 461,
+      "title": "La fuente veo"
+    },
+    {
+      "number": 462,
+      "title": "En lo profundo de la mar"
+    },
+    {
+      "number": 463,
+      "title": "En las aguas de la muerte"
+    },
+    {
+      "number": 464,
+      "title": "Las manos, Padre"
+    },
+    {
+      "number": 465,
+      "title": "Sábado santo"
+    },
+    {
+      "number": 466,
+      "title": "¡Cuán dulce en este día!"
+    },
+    {
+      "number": 467,
+      "title": "Ya el fin se acerca"
+    },
+    {
+      "number": 468,
+      "title": "Hoy es día de reposo"
+    },
+    {
+      "number": 469,
+      "title": "Otros seis días de labor"
+    },
+    {
+      "number": 470,
+      "title": "Hoy el sábado glorioso"
+    },
+    {
+      "number": 471,
+      "title": "En sombras de la tarde"
+    },
+    {
+      "number": 472,
+      "title": "Día santo del Señor"
+    },
+    {
+      "number": 473,
+      "title": "¡Oh día delicioso!"
+    },
+    {
+      "number": 474,
+      "title": "Oh, día del Señor"
+    },
+    {
+      "number": 475,
+      "title": "Señor, reposamos"
+    },
+    {
+      "number": 476,
+      "title": "Ya asoma el sol brillante"
+    },
+    {
+      "number": 477,
+      "title": "Santo día"
+    },
+    {
+      "number": 478,
+      "title": "Obediente a tu mandato"
+    },
+    {
+      "number": 479,
+      "title": "El pan de vida  soy"
+    },
+    {
+      "number": 480,
+      "title": "Amoroso nos convidas"
+    },
+    {
+      "number": 481,
+      "title": "Espíritu de santidad"
+    },
+    {
+      "number": 482,
+      "title": "Amémonos, hermanos"
+    },
+    {
+      "number": 483,
+      "title": "Jesús invita hoy"
+    },
+    {
+      "number": 484,
+      "title": "Hoy venimos"
+    },
+    {
+      "number": 485,
+      "title": "Traían en silencio presentes al Señor"
+    },
+    {
+      "number": 486,
+      "title": "Al Cristo ved"
+    },
+    {
+      "number": 487,
+      "title": "Suenen las palabras"
+    },
+    {
+      "number": 488,
+      "title": "Predica tú"
+    },
+    {
+      "number": 489,
+      "title": "¡Oh, dónde se hallará!"
+    },
+    {
+      "number": 490,
+      "title": "Jubilosas nuestras voces"
+    },
+    {
+      "number": 491,
+      "title": "Cuando pese nuestros hechos"
+    },
+    {
+      "number": 492,
+      "title": "Cuando Junte Jesús las naciones"
+    },
+    {
+      "number": 493,
+      "title": "Día grande viene"
+    },
+    {
+      "number": 494,
+      "title": "No puede el mundo ser mi hogar"
+    },
+    {
+      "number": 495,
+      "title": "Hay un feliz Edén"
+    },
+    {
+      "number": 496,
+      "title": "Jerusalén, mi amado hogar"
+    },
+    {
+      "number": 497,
+      "title": "Jerusalén, la excelsa"
+    },
+    {
+      "number": 498,
+      "title": "Las montañas de Sion"
+    },
+    {
+      "number": 499,
+      "title": "De luz sin par es ml mansión"
+    },
+    {
+      "number": 500,
+      "title": "Aunque en esta vida"
+    },
+    {
+      "number": 501,
+      "title": "¡Oh célica Jerusalén!"
+    },
+    {
+      "number": 502,
+      "title": "A veces oigo un himno"
+    },
+    {
+      "number": 503,
+      "title": "Las riberas de dicha inmortal"
+    },
+    {
+      "number": 504,
+      "title": "Del belLo país he leído"
+    },
+    {
+      "number": 505,
+      "title": "¿Nos veremos junto al río?"
+    },
+    {
+      "number": 506,
+      "title": "En la tierra adonde Iré"
+    },
+    {
+      "number": 507,
+      "title": "En la célíca morada"
+    },
+    {
+      "number": 508,
+      "title": "Al bello hogar"
+    },
+    {
+      "number": 509,
+      "title": "Todo es bello"
+    },
+    {
+      "number": 510,
+      "title": "Hogar de mis recuerdos"
+    },
+    {
+      "number": 511,
+      "title": "Guía a ti, Señor"
+    },
+    {
+      "number": 512,
+      "title": "Perfecto amor"
+    },
+    {
+      "number": 513,
+      "title": "Cristo, yo te seguiré"
+    },
+    {
+      "number": 514,
+      "title": "De su trono, mi Jesús"
+    },
+    {
+      "number": 515,
+      "title": "En este bello día"
+    },
+    {
+      "number": 516,
+      "title": "Cuando venga Jesucristo"
+    },
+    {
+      "number": 517,
+      "title": "¡Cuánto me alegra!"
+    },
+    {
+      "number": 518,
+      "title": "Cuando leo en la Biblia"
+    },
+    {
+      "number": 519,
+      "title": "Es el amor divino"
+    },
+    {
+      "number": 520,
+      "title": "Yo temprano busco a Cristo"
+    },
+    {
+      "number": 521,
+      "title": "Bellas las manitas son"
+    },
+    {
+      "number": 522,
+      "title": "Tu reino amo"
+    },
+    {
+      "number": 523,
+      "title": "¡Oh santo Dios!"
+    },
+    {
+      "number": 524,
+      "title": "Ven, alma que lloras"
+    },
+    {
+      "number": 525,
+      "title": "No habrá más llanto allá"
+    },
+    {
+      "number": 526,
+      "title": "Llegaremos al hogar"
+    },
+    {
+      "number": 527,
+      "title": "¿Para quién será el ay?"
+    }
+  ]
+}

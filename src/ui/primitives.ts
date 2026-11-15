@@ -1,0 +1,10 @@
+import { createElement, BookOpen, Music2, ListMusic, Settings2, Monitor, Search, ChevronLeft, ChevronRight, Plus, Play, Pause, Square, EyeOff, Sun, Download, FolderOpen, Check, ArrowUp, ArrowDown, X, Volume2, Radio, ArrowUpRight, Keyboard, Trash2, FileText, CircleHelp, Star } from 'lucide';
+const icons={book:BookOpen,music:Music2,list:ListMusic,settings:Settings2,monitor:Monitor,search:Search,left:ChevronLeft,right:ChevronRight,plus:Plus,play:Play,pause:Pause,stop:Square,hide:EyeOff,sun:Sun,download:Download,folder:FolderOpen,check:Check,up:ArrowUp,down:ArrowDown,close:X,volume:Volume2,live:Radio,external:ArrowUpRight,keyboard:Keyboard,trash:Trash2,file:FileText,help:CircleHelp,star:Star} as const;
+export type Icon = keyof typeof icons;
+export const icon=(name:Icon,cls=''):string=>createElement(icons[name],{width:18,height:18,'stroke-width':1.7,'aria-hidden':'true',class:cls}).outerHTML;
+export const esc=(value:unknown):string=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]??c));
+export function button(action:string,label:string,name?:Icon,variant='secondary',attrs=''):string{return `<button type="button" class="button ${variant}" data-action="${esc(action)}" ${attrs}>${name?icon(name):''}<span>${esc(label)}</span></button>`;}
+export const iconButton=(action:string,label:string,name:Icon,attrs=''):string=>`<button type="button" class="icon-button" data-action="${esc(action)}" title="${esc(label)}" aria-label="${esc(label)}" ${attrs}>${icon(name)}</button>`;
+export const empty=(name:Icon,title:string,description:string,actions=''):string=>`<div class="empty-state"><div class="empty-symbol">${icon(name)}</div><h2>${esc(title)}</h2><p>${esc(description)}</p>${actions}</div>`;
+export const wordmark=`<span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 40 40" fill="none"><path d="M20 6v8M20 26v8M6 20h8M26 20h8M10 10l6 6M24 24l6 6M10 30l6-6M24 16l6-6" stroke="currentColor" stroke-width="1.4"/><path d="M20 13l4 7-4 7-4-7 4-7Z" fill="currentColor"/></svg></span>`;
+
