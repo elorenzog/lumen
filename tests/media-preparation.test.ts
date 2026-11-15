@@ -1,5 +1,5 @@
-import { afterAll, beforeAll, describe, expect, it } from 'vitest';
-import { mkdtemp, readdir, rm, stat, writeFile } from 'node:fs/promises';
+import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
+import { mkdtemp, readdir, rename, rm, stat, writeFile } from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 import ffmpeg from 'ffmpeg-static';
@@ -7,6 +7,11 @@ import { z } from 'zod';
 import { inspectHymn, prepareHymn, run } from '../electron/media';
 import { readMediaInfo } from '../electron/media-preparation';
 import type { Hymn } from '../src/shared/contracts';
+
+vi.mock('node:fs/promises', async importOriginal => {
+  const original = await importOriginal<typeof import('node:fs/promises')>();
+  return { ...original, rename: vi.fn(original.rename) };
+});
 
 let directory = '';
 let hymn: Hymn;
@@ -50,10 +55,32 @@ describe('Given a local MKV with H264 and two audio tracks', () => {
     expect(rebuilt).toBe(target);
     expect((await readMediaInfo(rebuilt)).streams.map(stream => stream.codec_name)).toEqual(['h264', 'aac']);
   });
-  it('keeps concurrent preparations in independent temporary files', async () => {
+  it('publishes concurrent preparations once without replacing media already available for playback', async () => {
     const cache = path.join(directory, 'concurrent');
+    const before = vi.mocked(rename).mock.calls.length;
     const results = await Promise.all([prepareHymn(hymn, 1, { cache, status: () => {} }), prepareHymn(hymn, 1, { cache, status: () => {} })]);
     expect(results[0]).toBe(results[1]);
+    expect(vi.mocked(rename).mock.calls.slice(before).filter(([, target]) => target === results[0])).toHaveLength(1);
+    expect((await readMediaInfo(results[0])).streams.map(stream => stream.codec_name)).toEqual(['h264', 'aac']);
+    expect((await readdir(cache)).some(name => name.includes('.tmp'))).toBe(false);
+  });
+  it('allows another concurrent request to finish after a cache writer fails', async () => {
+    const cache = path.join(directory, 'failed-writer');
+    vi.mocked(rename).mockImplementationOnce(async () => { throw Object.assign(new Error('Publication denied'), { code: 'EPERM' }); });
+    const results = await Promise.allSettled([prepareHymn(hymn, 1, { cache, status: () => {} }), prepareHymn(hymn, 1, { cache, status: () => {} })]);
+    expect(results.filter(result => result.status === 'rejected')).toHaveLength(1);
+    const ready = results.find(result => result.status === 'fulfilled');
+    if (!ready || ready.status !== 'fulfilled') throw new Error('No preparation survived the failed writer');
+    expect((await readMediaInfo(ready.value)).streams.map(stream => stream.codec_name)).toEqual(['h264', 'aac']);
+    expect((await readdir(cache)).some(name => name.includes('.tmp'))).toBe(false);
+  });
+  it('keeps cancellation independent when two requests prepare the same track', async () => {
+    const controller = new AbortController();
+    const cache = path.join(directory, 'independent-cancel');
+    const cancelled = prepareHymn(hymn, 2, { cache, signal: controller.signal, status: value => { if (value.endsWith('%')) controller.abort(); } });
+    const survivor = prepareHymn(hymn, 2, { cache, status: () => {} });
+    await expect(cancelled).rejects.toMatchObject({ name: 'AbortError' });
+    expect((await readMediaInfo(await survivor)).streams.map(stream => stream.codec_name)).toEqual(['h264', 'aac']);
     expect((await readdir(cache)).some(name => name.includes('.tmp'))).toBe(false);
   });
   it('cleans an aborted preparation before a new request can reuse its cache', async () => {

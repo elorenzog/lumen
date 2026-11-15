@@ -1,5 +1,10 @@
 # Cambios de LUMEN
 
+## 0.8.1
+
+- Corrección de la preparación simultánea del mismo himno en Windows: la caché se publica una sola vez y cada solicitud conserva su propia cancelación.
+- Primera distribución instalable con actualizaciones desde GitHub, créditos e importación local de carpetas de Biblias, incorporados en 0.8.0.
+
 ## 0.8.0
 
 - Actualizaciones desde GitHub Releases: búsqueda opcional al iniciar, descarga manual, progreso y reinicio solicitado por el operador.

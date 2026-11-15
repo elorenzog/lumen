@@ -14,6 +14,16 @@ const probeSchema = z.object({
   streams: z.array(z.object({ index: z.number().int(), codec_type: z.string(), codec_name: z.string().optional(), pix_fmt: z.string().optional(), channels: z.number().int().optional(), profile: z.string().optional(), tags: z.object({ title: z.string().optional(), language: z.string().optional() }).optional() })),
 });
 const completionSchema = z.object({ version: z.literal(2), size: z.number().int().positive() });
+const cachePublications = new Map<string, Promise<void>>();
+async function withCacheLock<T>(target: string, operation: () => Promise<T>): Promise<T> {
+  const previous = cachePublications.get(target) ?? Promise.resolve();
+  const pending = previous.then(operation);
+  // Keep the queue usable after a failed writer; its caller still receives the error.
+  const settled = pending.then(() => {}, () => {});
+  cachePublications.set(target, settled);
+  try { return await pending; }
+  finally { if (cachePublications.get(target) === settled) cachePublications.delete(target); }
+}
 export type PreparationContext = { readonly cache: string; readonly status: (message: string) => void; readonly signal?: AbortSignal };
 export async function readMediaInfo(file: string, signal?: AbortSignal): Promise<z.infer<typeof probeSchema>> {
   return probeSchema.parse(JSON.parse(await run(ffprobeBinary.path, ['-v', 'error', '-show_format', '-show_streams', '-of', 'json', file], signal ? { signal } : {})));
@@ -41,8 +51,8 @@ export async function prepareHymn(hymn: Hymn, track: number, context: Preparatio
   const current = await stat(hymn.path);
   const key = createHash('sha256').update(`${hymn.id}:${current.size}:${current.mtimeMs}:${track}:v2`).digest('hex');
   await mkdir(cache, { recursive: true });
-  const target = path.join(cache, `${key}.mp4`);
-  if (await cached(target)) { assertMediaActive(signal); return target; }
+  const target = path.resolve(cache, `${key}.mp4`);
+  if (await withCacheLock(target, () => cached(target))) { assertMediaActive(signal); return target; }
   if (!ffmpegBinary) throw new LumenError('ffmpeg', 'No se encontró FFmpeg para este sistema.');
   const info = await readMediaInfo(hymn.path, signal);
   const video = info.streams.find(stream => stream.codec_type === 'video');
@@ -81,10 +91,15 @@ export async function prepareHymn(hymn: Hymn, track: number, context: Preparatio
     assertMediaActive(signal);
     await writeFile(completionTemporary, JSON.stringify({ version: 2, size }));
     assertMediaActive(signal);
-    await rename(temporary, target);
-    assertMediaActive(signal);
-    await rename(completionTemporary, `${target}.json`);
-    assertMediaActive(signal);
+    await withCacheLock(target, async () => {
+      assertMediaActive(signal);
+      if (await cached(target)) { assertMediaActive(signal); return; }
+      assertMediaActive(signal);
+      await rename(temporary, target);
+      assertMediaActive(signal);
+      await rename(completionTemporary, `${target}.json`);
+      assertMediaActive(signal);
+    });
     return target;
   } finally { await Promise.all([removeTemporary(temporary), removeTemporary(completionTemporary)]); }
 }
