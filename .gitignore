@@ -1,4 +1,7 @@
 node_modules/
+src-tauri/target/
+src-tauri/gen/
+src-tauri/tools/
 dist/
 dist-electron/
 release/
@@ -8,6 +11,7 @@ test-results/
 recovery-profile/
 imports/
 Biblias-para-importar/
+Firmas-locales/
 resources/bibles/
 /Iniciar-LUMEN.cmd
 scripts/audit-legacy-media.mjs

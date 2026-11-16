@@ -1,0 +1,12 @@
+PRAGMA foreign_keys=ON;
+PRAGMA journal_mode=WAL;
+PRAGMA busy_timeout=5000;
+CREATE TABLE IF NOT EXISTS translations(id TEXT PRIMARY KEY, metadata TEXT NOT NULL);
+CREATE TABLE IF NOT EXISTS books(id INTEGER PRIMARY KEY,name TEXT NOT NULL);
+CREATE TABLE IF NOT EXISTS chapters(translation_id TEXT NOT NULL REFERENCES translations(id) ON DELETE CASCADE,book INTEGER NOT NULL REFERENCES books(id),chapter INTEGER NOT NULL,PRIMARY KEY(translation_id,book,chapter));
+CREATE TABLE IF NOT EXISTS verses(id INTEGER PRIMARY KEY,translation_id TEXT NOT NULL,book INTEGER NOT NULL,chapter INTEGER NOT NULL,verse INTEGER NOT NULL,end_verse INTEGER,text TEXT NOT NULL,UNIQUE(translation_id,book,chapter,verse),FOREIGN KEY(translation_id,book,chapter) REFERENCES chapters(translation_id,book,chapter) ON DELETE CASCADE);
+CREATE VIRTUAL TABLE IF NOT EXISTS verses_fts USING fts5(text,content='verses',content_rowid='id',tokenize='unicode61 remove_diacritics 2');
+CREATE TRIGGER IF NOT EXISTS verses_insert AFTER INSERT ON verses BEGIN INSERT INTO verses_fts(rowid,text) VALUES(new.id,new.text); END;
+CREATE TRIGGER IF NOT EXISTS verses_delete AFTER DELETE ON verses BEGIN INSERT INTO verses_fts(verses_fts,rowid,text) VALUES('delete',old.id,old.text); END;
+CREATE TRIGGER IF NOT EXISTS verses_update AFTER UPDATE ON verses BEGIN INSERT INTO verses_fts(verses_fts,rowid,text) VALUES('delete',old.id,old.text); INSERT INTO verses_fts(rowid,text) VALUES(new.id,new.text); END;
+PRAGMA user_version=1;

@@ -1,0 +1,7 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "desktop",
+  "description": "Eventos locales de LUMEN. Las acciones se autorizan también por ventana en Rust.",
+  "windows": ["main", "projection"],
+  "permissions": ["core:event:allow-listen", "core:event:allow-unlisten"]
+}
