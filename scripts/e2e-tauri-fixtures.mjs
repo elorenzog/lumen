@@ -91,6 +91,7 @@ export async function exerciseNativeFixtures({page,output,data,evidence}){
   const image=path.join(data,'Fondo local.png');
   await output.screenshot({path:image});
   await dialogs(data,{'import-background':[image]});
+  if(!await page.locator('#appearance-options').evaluate(element=>element.open))await page.locator('#appearance-options > summary').click();
   await page.locator('[data-action="appearance-open"]').click();
   await page.locator('#ap-mode').selectOption('image');
   await page.locator('[data-action="appearance-import"]').click();

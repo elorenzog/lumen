@@ -1,4 +1,5 @@
 import './styles.css';
+import './beginner.css';
 import { operator } from './operator';
 import { projection } from './projection';
 import { initializeNative } from './native';

@@ -70,7 +70,7 @@ export function featureActions(state:UIState,context:FeatureContext){
         case 'hymn-search-scope':state.hymnSearchScope=z.enum(['all','title','lyrics','topic','references','authors']).parse(target.value);render();return true;
         case 'verse-nav':{
           const verse=state.bible.verses.find(v=>v.book===state.book&&v.chapter===state.chapter&&v.verse===Number(target.value));
-          if(verse){state.selected=[verse];render();document.querySelector('.verse.selected')?.scrollIntoView({block:'nearest'});if(state.snapshot.settings.autoProject)await project();}return true;
+          if(verse){state.selected=[verse];render();if(state.snapshot.settings.autoProject)await project();}return true;
         }
         default:return false;
       }

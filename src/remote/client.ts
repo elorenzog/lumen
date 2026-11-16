@@ -3,7 +3,7 @@ import '../styles.css';
 import './remote.css';
 import { remoteStateSchema,remoteLibrarySchema,remoteResultsSchema } from '../shared/remote-contracts';
 import type { RemoteCommand } from '../shared/remote-contracts';
-import { books } from '../shared/domain';
+import { books,formatTime,playbackPosition } from '../shared/domain';
 import { remoteModel } from './model';
 import { livePanel,remoteView } from './view';
 
@@ -39,6 +39,7 @@ if(root){const app=root;document.body.classList.add('remote-body');
   }
   async function command(value:RemoteCommand):Promise<void>{
     if(model.connection!=='connected')return;
+    model.seekDraft=null;
     model.pending++;model.error='';model.message='Enviando a LUMEN.';render();
     try{model.state=remoteStateSchema.parse(await api.post('/api/command',{json:value,timeout:120000}).json());model.message='Acción enviada a LUMEN.';}
     finally{model.pending--;render();}
@@ -59,6 +60,7 @@ if(root){const app=root;document.body.classList.add('remote-body');
   });
   app.addEventListener('input',event=>{
     const input=event.target;if(!(input instanceof HTMLInputElement))return;
+    if(input.id==='remote-seek'&&model.seekDraft){model.seekDraft.position=Number(input.value);const label=document.getElementById('remote-seek-value');if(label)label.textContent=formatTime(model.seekDraft.position);return;}
     switch(input.id){case 'remote-pin':model.pin=input.value;break;case 'remote-query':model.query=input.value;break;case 'remote-range':model.range=input.value;break;case 'remote-chapter':model.chapter=Number(input.value);break;case 'remote-hymn-query':model.hymnQuery=input.value;render();break;}
   });
   app.addEventListener('change',event=>{
@@ -69,7 +71,6 @@ if(root){const app=root;document.body.classList.add('remote-body');
       case 'remote-edition':model.edition=input.value==='1962'?'1962':input.value==='all'?'all':'2009';model.hymnId='';render();break;
       case 'remote-track':model.track=Number(input.value);break;
       case 'remote-volume':run(command({type:'volume',value:Number(input.value)}));break;
-      case 'remote-seek':run(command({type:'playback',position:Number(input.value)}));break;
     }
   });
   app.addEventListener('click',event=>{
@@ -78,6 +79,9 @@ if(root){const app=root;document.body.classList.add('remote-body');
     const action=button.dataset['action'];const output=model.state?.output;
     if(action?.startsWith('tab-')){model.tab=action==='tab-himnario'?'himnario':action==='tab-programa'?'programa':'biblia';render();return;}
     switch(action){
+      case 'seek-open':if(output?.slide.kind==='hymn'){model.seekDraft={hymnId:output.slide.hymnId,track:output.slide.track,revision:output.revision,position:Math.floor(playbackPosition(output))};render();document.getElementById('remote-seek')?.focus({preventScroll:true});}break;
+      case 'seek-cancel':model.seekDraft=null;render();break;
+      case 'seek-apply':{const draft=model.seekDraft;if(draft&&output?.slide.kind==='hymn'&&draft.hymnId===output.slide.hymnId&&draft.track===output.slide.track&&draft.revision===output.revision&&!output.preparing)run(command({type:'playback',position:draft.position}));else{model.seekDraft=null;model.message='La reproducción cambió. Vuelve a elegir la posición.';render();}break;}
       case 'select-verse':{const verse=model.results?.[Number(button.dataset['id'])];if(verse){model.selected=[verse];model.book=verse.book;model.chapter=verse.chapter;model.range=String(verse.verse);render();}break;}
       case 'select-hymn':{const hymn=model.library?.hymns.find(hymn=>hymn.id===button.dataset['id']);if(hymn){model.hymnId=hymn.id;model.track=hymn.tracks[0]?.index??0;render();}break;}
       case 'project-reference':{const first=model.selected[0];const last=model.selected.at(-1);if(first&&last)run(command({type:'reference',bibleId:model.bibleId,book:first.book,chapter:first.chapter,range:`${first.verse}-${last.endVerse??last.verse}`}));break;}

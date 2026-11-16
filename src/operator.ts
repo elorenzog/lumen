@@ -92,7 +92,7 @@ export async function operator(root:HTMLElement):Promise<void>{
       case 'import-bible-folder':state.busy=true;render();try{await invoke({type:'import-bible-folder'});state.message='Carpeta de Biblias procesada.';}finally{state.busy=false;render();}break;
       case 'book':state.book=Number(id);state.chapter=1;state.query='';render();root.querySelector('.verses')?.scrollTo(0,0);break;
       case 'chapter-pick':state.chapter=Number(id);state.query='';state.rangeInput='';render();root.querySelector('.verses')?.scrollTo(0,0);break;
-      case 'select-range':state.selected=selectRange(state.bible.verses.filter(v=>v.book===state.book&&v.chapter===state.chapter),state.rangeInput);state.query='';render();root.querySelector('.verse.selected')?.scrollIntoView({block:'nearest'});if(state.snapshot.settings.autoProject)await project();break;
+      case 'select-range':state.selected=selectRange(state.bible.verses.filter(v=>v.book===state.book&&v.chapter===state.chapter),state.rangeInput);state.query='';render();if(state.snapshot.settings.autoProject)await project();break;
       case 'testament':state.testament=id==='old'?'old':id==='new'?'new':'all';render();break;
       case 'verse':{
         const verse=state.bible.verses.find(v=>v.book===Number(button.dataset['book'])&&v.chapter===Number(button.dataset['chapter'])&&v.verse===Number(id));
@@ -135,6 +135,7 @@ export async function operator(root:HTMLElement):Promise<void>{
     guarded((async()=>{
       if(base.change(target)||await appearance.change(target)||appearance.input(target)||await features.change(target))return;
       switch(target.id){
+        case 'remote-address':state.remoteUrl=target.value;render();break;
         case 'check-updates-startup':if(target instanceof HTMLInputElement)await invoke({type:'update-preference',checkAtStartup:target.checked});render();break;
         case 'translation':{state.bible=bibleSchema.parse(await invoke({type:'bible',id:target.value}));state.selected=state.bible.verses.filter(v=>v.book===state.book&&v.chapter===state.chapter&&v.verse===(state.selected[0]?.verse??1));state.searchResults=null;if(state.comparisonId===state.bible.id){state.comparison=null;state.comparisonId='';}render();if(state.query)await search();break;}
         case 'chapter':state.chapter=Number(target.value);state.query='';render();break;

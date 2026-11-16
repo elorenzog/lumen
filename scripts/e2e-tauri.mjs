@@ -143,6 +143,7 @@ try{
   await page.getByRole('button',{name:'Versículo 17',exact:true}).click();
   await output.waitForFunction(()=>document.querySelector('.stage-reference')?.textContent?.includes('3:17'));
   await page.locator('#auto-project').uncheck();
+  await page.locator('#range-options > summary').click();
   await page.locator('#verse-range').fill('16-18');
   await page.locator('[data-action="select-range"]').click();
   await page.locator('.project-button').click();
@@ -150,6 +151,7 @@ try{
   await capture(output,'projection-range');
   await page.locator('.add-program').click();
   assert.equal((await snapshot(page)).program.length,1);
+  if(!await page.locator('#appearance-options').evaluate(element=>element.open))await page.locator('#appearance-options > summary').click();
   await page.locator('[data-action="appearance-open"]').click();
   await page.locator('#ap-mode').selectOption('gradient');
   await page.locator('#ap-align').selectOption('left');
