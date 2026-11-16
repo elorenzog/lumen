@@ -9,6 +9,7 @@ import { setTimeout as delay } from 'node:timers/promises';
 import { chromium } from 'playwright';
 import { exerciseNativeFixtures, importOptionalBibleFolder } from './e2e-tauri-fixtures.mjs';
 import { invoke, snapshot, waitForNative } from './e2e-tauri-native.mjs';
+import { classifyConsoleErrors, diagnosticReplacer, resourceAddress } from './e2e-tauri-diagnostics.mjs';
 
 const cwd=process.cwd();
 const executable=process.env.LUMEN_E2E_EXECUTABLE??path.join(cwd,'src-tauri','target','debug','lumen.exe');
@@ -17,6 +18,10 @@ const evidence=path.join(cwd,'test-results','tauri');
 await mkdir(evidence,{recursive:true});
 await writeFile(path.join(data,'dialogs.json'),'{}');
 const failures=[];
+const resourceFailures=[];
+const consoleErrors=[];
+const knownHymns=new Map();
+const pendingDiagnostics=new Set();
 const screenshots=[];
 let child;
 let browser;
@@ -48,8 +53,8 @@ async function launch(){
   }
   assert.ok(browser,'Native WebView2 CDP endpoint was not available within 60 seconds');
   const page=await findPage(false);
-  observe(page);
   await page.locator('.brand-name').waitFor({timeout:30000});
+  await observe(page);
   assert.equal(await page.evaluate(()=>Boolean(window.__TAURI_INTERNALS__)&&!window.__TAURI__),true,'Actual Tauri IPC is present without a global Tauri API');
   return page;
 }
@@ -64,14 +69,36 @@ async function findPage(output){
   throw new Error(`Native ${output?'projection':'operator'} webview did not appear`);
 }
 
-function observe(page){
+async function observe(page){
   page.on('pageerror',error=>failures.push(error.message));
-  page.on('console',message=>{if(message.type()==='error')failures.push(message.text());});
+  page.on('console',message=>{
+    const text=message.text();
+    if(text.startsWith('LUMEN_E2E_HYMN:')){const hymn=JSON.parse(text.slice(15));knownHymns.set(hymn.url,hymn.revision);}
+    if(message.type()==='error')consoleErrors.push({message:text,url:resourceAddress(message.location().url),page:page.url()});
+  });
+  page.on('response',response=>{
+    if(response.status()<400)return;
+    const detail={at:Date.now(),status:response.status(),url:resourceAddress(response.url()),resourceType:response.request().resourceType(),page:page.url()};
+    resourceFailures.push(detail);
+    const pending=page.evaluate(async()=>{
+      const result=await window.lumen.invoke({type:'snapshot'});
+      if(!result.ok)return {error:result.error};
+      const output=result.data.output;
+      const address=output.slide.kind==='hymn'?new URL(output.slide.mediaUrl):null;
+      return {revision:output.revision,kind:output.slide.kind,connected:output.connected,preparing:output.preparing,activeMedia:address?.href??null};
+    }).then(native=>{detail.native=native;}).catch(error=>{detail.diagnosticError=error instanceof Error?error.message:String(error);});
+    pendingDiagnostics.add(pending);void pending.finally(()=>pendingDiagnostics.delete(pending));
+  });
+  await page.evaluate(async()=>{
+    const record=snapshot=>{if(snapshot.output.slide.kind==='hymn'){const address=new URL(snapshot.output.slide.mediaUrl);console.debug('LUMEN_E2E_HYMN:'+JSON.stringify({url:address.href,revision:snapshot.output.revision}));}};
+    window.lumen.subscribe(record);
+    const response=await window.lumen.invoke({type:'snapshot'});if(response.ok)record(response.data);
+  });
 }
 
-async function capture(page,name){
+async function capture(page,name,fullPage=true){
   const file=`${name}.png`;
-  await page.screenshot({path:path.join(evidence,file),fullPage:true});
+  await page.screenshot({path:path.join(evidence,file),fullPage});
   screenshots.push(file);
 }
 
@@ -100,8 +127,8 @@ try{
   assert.equal(await page.locator('.verse').count(),1);
   await page.locator('.project-button').click();
   const output=await findPage(true);
-  observe(output);
   await output.locator('.stage-text').waitFor();
+  await observe(output);
   assert.match(await output.locator('.stage-reference').innerText(),/Juan 3:16/);
   await capture(output,'projection-verse');
   const restricted=await output.evaluate(()=>window.lumen.invoke({type:'program',program:[]}));
@@ -165,8 +192,18 @@ try{
       assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,`${view} fits ${width}px`);
       await capture(page,`${view}-${label}`);
     }
-    await page.locator('#about-lumen').scrollIntoViewIfNeeded();
-    await capture(page,`about-${label}`);
+    await page.locator('[data-action="show-about"]').click();
+    await page.waitForFunction(()=>{
+      const about=document.getElementById('about-lumen');
+      const heading=document.getElementById('about-heading');
+      const reader=about?.closest('.reader');
+      const credits=about?.querySelector('.developer-row:last-child');
+      if(!heading||!reader||!credits)return false;
+      if(innerWidth<=640)return true;
+      const frame=reader.getBoundingClientRect();
+      return heading.getBoundingClientRect().top>=frame.top&&credits.getBoundingClientRect().bottom<=frame.bottom;
+    });
+    await capture(page,`about-${label}`,false);
     assert.equal(await page.locator('#check-updates-startup').isChecked(),false);
     assert.equal(await page.locator('.developer-row').count(),2);
   }
@@ -183,8 +220,11 @@ try{
   assert.ok(restored.bibles.some(bible=>bible.id===media.fileBibleId)&&restored.bibles.some(bible=>bible.id==='native-folder-test'),'Native file and folder Bible imports persist');
   assert.equal(restored.backgrounds.length,1,'Managed background copy persists after source removal');
   if(realEditions)assert.ok(realEditions.ids.every(id=>restored.bibles.some(bible=>bible.id===id)),'All 13 real editions persist after native restart');
-  assert.deepEqual(failures,[],'No renderer errors');
-  await writeFile(path.join(evidence,'result.json'),JSON.stringify({result:'PASS',runtime:'Tauri/WebView2',isolatedProfile:true,scenarios:['native IPC','native displays','offline Bible','reference search','verse and range projection','projection sender permissions','blackout','automatic projection','appearance draft and apply','program persistence','Escape closes projection','snapshot subscription cleanup','updater preference persistence','old hymnal catalogue','native Bible file and folder imports','managed image and base-screen background','two-audio MKV import and playback','track switch','pause and seek','hymn replacement','stop and removal during preparation','media end and replay','all views at 375/768/1500'],nativeMedia:media,realEditions,screenshots,rendererErrors:failures},null,2));
+  while(pendingDiagnostics.size)await Promise.all([...pendingDiagnostics]);
+  const classified=classifyConsoleErrors({consoleErrors,responses:resourceFailures,knownHymns});
+  failures.push(...classified.unexpected.map(error=>error.message));
+  assert.deepEqual(failures,[],'No unexpected renderer errors');
+  await writeFile(path.join(evidence,'result.json'),JSON.stringify({result:'PASS',runtime:'Tauri/WebView2',isolatedProfile:true,scenarios:['native IPC','native displays','offline Bible','reference search','verse and range projection','projection sender permissions','blackout','automatic projection','appearance draft and apply','program persistence','Escape closes projection','snapshot subscription cleanup','updater preference persistence','old hymnal catalogue','native Bible file and folder imports','managed image and base-screen background','two-audio MKV import and playback','track switch','pause and seek','hymn replacement','stop and removal during preparation','media end and replay','all views at 375/768/1500'],nativeMedia:media,realEditions,screenshots,rendererErrors:failures,expectedCancellationResponses:classified.expectedCancellationResponses,resourceResponses:resourceFailures,consoleErrors},diagnosticReplacer,2));
   console.log('PASS: native Tauri IPC, projection, settings, responsive UI, and restart persistence.');
 }catch(error){
   const diagnostics=await Promise.allSettled((browser?.contexts().flatMap(context=>context.pages())??[]).map(async(page,index)=>{
@@ -192,6 +232,6 @@ try{
     await page.screenshot({path:path.join(evidence,`failure-${index}.png`),timeout:5000});
     return state;
   }));
-  await writeFile(path.join(evidence,'result.json'),JSON.stringify({result:'FAIL',error:error instanceof Error?error.message:String(error),nativeLog,screenshots,rendererErrors:failures,diagnostics},null,2));
+  await writeFile(path.join(evidence,'result.json'),JSON.stringify({result:'FAIL',error:error instanceof Error?error.message:String(error),nativeLog,screenshots,rendererErrors:failures,resourceFailures,consoleErrors,knownHymns:[...knownHymns],diagnostics},diagnosticReplacer,2));
   throw error;
 }finally{await stop();}

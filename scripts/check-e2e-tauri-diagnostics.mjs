@@ -1,0 +1,27 @@
+import assert from 'node:assert/strict';
+import { classifyConsoleErrors, diagnosticReplacer, resourceAddress } from './e2e-tauri-diagnostics.mjs';
+
+const hymn='http://127.0.0.1:1234/old-hymn';
+const page='http://tauri.localhost/index.html?output=1';
+const message='Failed to load resource: the server responded with a status of 404 (Not Found)';
+const consoleError={message,url:hymn,page};
+const response={status:404,url:hymn,page,resourceType:'media',native:{revision:8,activeMedia:null}};
+const knownHymns=new Map([[hymn,7]]);
+const classify=overrides=>classifyConsoleErrors({consoleErrors:[consoleError],responses:[response],knownHymns,...overrides});
+assert.equal(classify({}).unexpected.length,0,'Previously observed hymn URL after a newer native revision is cancellation');
+assert.equal(classify({responses:[{...response,native:{revision:8,activeMedia:hymn}}]}).unexpected.length,1,'Active media 404 remains an error');
+assert.equal(classify({knownHymns:new Map()}).unexpected.length,1,'Unknown media 404 remains an error');
+assert.equal(classify({responses:[{...response,resourceType:'image'}]}).unexpected.length,1,'Background/static image 404 remains an error');
+assert.equal(classify({responses:[{...response,native:{revision:7,activeMedia:null}}]}).unexpected.length,1,'Same revision does not prove obsolete playback');
+assert.equal(classify({responses:[{...response,native:{revision:8}}]}).unexpected.length,1,'Missing current media evidence remains an error');
+assert.equal(classify({responses:[{...response,status:500}]}).unexpected.length,1,'Server failure remains an error');
+assert.equal(classify({consoleErrors:[{...consoleError,url:null}]}).unexpected.length,1,'Unpaired console location remains an error');
+assert.equal(classify({responses:[{...response,page:'http://tauri.localhost/'}]}).unexpected.length,1,'Different window response cannot excuse an error');
+assert.equal(classify({consoleErrors:[{...consoleError,message:'Unhandled playback failure'}]}).unexpected.length,1,'Other renderer errors remain failures');
+assert.equal(resourceAddress(`${hymn}?token=secret`),`${hymn}?token=secret`,'Correlation keeps the complete URL only in memory');
+assert.equal(diagnosticReplacer('',`${hymn}?token=secret`),hymn,'Persisted diagnostics remove query credentials');
+const asset='00112233-4455-6677-8899-aabbccddeeff';
+assert.equal(diagnosticReplacer('',`http://127.0.0.1:1234/${'a'.repeat(64)}/${asset}?token=secret`),`http://127.0.0.1:1234/<token>/${asset}`,'Persisted diagnostics redact path bearer tokens and preserve asset IDs');
+assert.equal(classify({consoleErrors:[{...consoleError,url:`${hymn}?token=wrong`}],responses:[{...response,url:`${hymn}?token=wrong`}]}).unexpected.length,1,'Different credentials cannot match an observed native URL');
+assert.equal(resourceAddress(''),null,'Missing locations are retained as unclassified');
+console.log('PASS: obsolete media cancellation classification rejects active, unknown, static, unpaired, and unrelated errors.');
