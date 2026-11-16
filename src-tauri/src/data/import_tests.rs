@@ -96,7 +96,7 @@ fn hymn_metadata_defaults_do_not_swallow_future_properties_when_serialized() {
 
 #[test]
 fn hymn_modified_timestamp_preserves_ieee_bits_when_json_is_round_tripped() {
-    // Given an Electron timestamp whose final decimal requires exact f64 parsing.
+    // Given a persisted millisecond timestamp whose final decimal requires exact f64 parsing.
     let raw = r#"{"id":"precision-fixture","number":467,"title":"Fixture","path":"fixture.mkv","duration":12,"tracks":[{"index":1,"label":"Audio","language":"spa"}],"size":100,"modified":1794674045425.3843}"#;
     let expected: f64 = 1_794_674_045_425.384_3;
     // When parsing and serializing the native persistence model.

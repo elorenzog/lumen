@@ -137,6 +137,7 @@ try{
   await output.locator('#app.blackout').waitFor();
   await page.locator('[data-action="blackout"]').click();
   await output.locator('#app:not(.blackout)').waitFor();
+  await page.locator('#appearance-options > summary').click();
   await page.locator('#auto-project').check();
   await page.locator('#global-search').fill('');
   await page.locator('#global-search').press('Enter');

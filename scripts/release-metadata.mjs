@@ -27,7 +27,7 @@ const signatureFile = `${installer}.sig`;
 const signature = unsigned ? undefined : (await readFile(path.join(source, signatureFile), 'utf8')).trim();
 if (!unsigned) assert.ok(signature?.length, 'Updater signature is empty');
 const notes = `${section}\n\n### Instalación y actualizaciones\n\n` +
-  'La primera instalación de Tauri se realiza manualmente. Las versiones Electron 0.8.x no pueden usar este canal. ' +
+  'La primera instalación de Tauri se realiza manualmente. Las versiones 0.8.x no pueden usar este canal. ' +
   'Las siguientes actualizaciones Tauri verifican la firma con la clave pública incluida en LUMEN.\n\n' +
   'Se incluyen RV1909 y BLL. Las demás Biblias se importan desde archivos locales; los videos de himnos no se distribuyen.\n\n' +
   'Las sumas SHA-256 están en SHA256SUMS.txt. La firma del actualizador no es un certificado Authenticode de Windows.\n' +

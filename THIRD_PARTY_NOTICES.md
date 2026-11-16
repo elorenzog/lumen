@@ -17,10 +17,8 @@ jsQR (Apache-2.0) se utiliza únicamente como herramienta de prueba para decodif
 
 - Santa Biblia libre Latinoamericano (BLL): dominio público, texto distribuido por fetch.bible; fuente y estado de borrador: https://ebible.org/Scriptures/details.php?id=spabll. Se conservan texto y numeración de la distribución. 31,095 entradas no vacías.
 - fetch.bible: https://fetch.bible/access/manual/. El manifiesto de licencias se verifica antes de cada descarga y sus metadatos se guardan en la base local.
-- usfm-js: MIT, https://github.com/unfoldingWord/usfm-js.
-- fflate: MIT, https://github.com/101arrowz/fflate.
 - ky: MIT, https://github.com/sindresorhus/ky.
-- SQLite mediante `rusqlite` en el backend Rust de Tauri. SQLite se distribuye como dominio público: https://sqlite.org/copyright.html. Las versiones Electron anteriores usaban `node:sqlite`.
+- SQLite mediante `rusqlite` en el backend Rust de Tauri. SQLite se distribuye como dominio público: https://sqlite.org/copyright.html.
 
 No se incorporan textos ni credenciales de API.Bible o AO Lab, ni bases morfológicas de STEPBible.
 
@@ -39,14 +37,12 @@ Reina-Valera 1909: dominio público.
 - NSIS: instalador de Windows; licencias zlib/libpng y de sus componentes. https://nsis.sourceforge.io/License
 - rusqlite: MIT. https://github.com/rusqlite/rusqlite
 - Tokio, Axum, Serde, Reqwest, parking_lot y thiserror: dependencias del backend Rust; sus licencias y versiones exactas se conservan en sus paquetes y en `src-tauri/Cargo.lock`.
-- Electron (MIT) y electron-updater / electron-builder (MIT): usados en las distribuciones históricas hasta 0.8.x y herramientas de referencia. https://github.com/electron/electron y https://github.com/electron-userland/electron-builder
 - Vite: MIT. https://github.com/vitejs/vite
 - TypeScript: Apache-2.0. https://github.com/microsoft/TypeScript
 - Zod: MIT. https://github.com/colinhacks/zod
 - Lucide: ISC. https://github.com/lucide-icons/lucide
-- fast-xml-parser: MIT. https://github.com/NaturalIntelligence/fast-xml-parser
 
-Los textos completos de licencia de las dependencias se conservan en sus paquetes. Tauri usa el WebView del sistema; la distribución de LUMEN 0.9 no empaqueta Electron. Las publicaciones Electron anteriores conservan sus avisos LICENSE y LICENSES.chromium.html.
+Los textos completos de licencia de las dependencias se conservan en sus paquetes. Tauri usa el WebView del sistema.
 
 ## FFmpeg / FFprobe
 

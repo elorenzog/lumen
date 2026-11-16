@@ -21,28 +21,22 @@
   },
   "pnpm": {
     "onlyBuiltDependencies": [
-      "electron",
       "esbuild",
       "ffmpeg-static"
     ]
   },
   "dependencies": {
     "@tauri-apps/api": "^2.11.1",
-    "fast-xml-parser": "^5.12.1",
-    "fflate": "^0.8.3",
     "ffmpeg-static": "^5.3.0",
     "ffprobe-static": "^3.1.0",
     "ky": "^2.2.0",
     "lucide": "^1.72.0",
     "qrcode-generator": "^2.0.4",
-    "usfm-js": "^3.5.0",
     "zod": "^4.6.7"
   },
   "devDependencies": {
     "@tauri-apps/cli": "^2.11.5",
     "@types/node": "^26.6.6",
-    "electron": "^45.3.2",
-    "electron-updater": "^6.8.11",
     "esbuild": "^0.28.2",
     "jsqr": "^1.4.0",
     "playwright": "^1.65.1",

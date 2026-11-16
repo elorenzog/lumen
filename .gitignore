@@ -3,7 +3,6 @@ src-tauri/target/
 src-tauri/gen/
 src-tauri/tools/
 dist/
-dist-electron/
 release/
 test-results/
 *.log

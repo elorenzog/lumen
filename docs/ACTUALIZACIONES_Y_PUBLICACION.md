@@ -4,11 +4,11 @@ Desde 0.9.0, LUMEN usa Tauri 2, Rust y un instalador NSIS para Windows x64. El c
 
 La firma de Tauri autentica las actualizaciones. Es independiente de Authenticode: no hay certificado de editor de Windows configurado y Windows puede mostrar una advertencia.
 
-## Primera instalación y cambio desde Electron
+## Primera instalación y cambio desde versiones 0.8.x
 
-La publicación estable 0.8.1 sigue siendo la distribución Electron hasta que se publique una versión Tauri. Descarga e instala manualmente el instalador Tauri de la nueva publicación cuando esté disponible. Conserva un respaldo de tus datos y tus carpetas originales de Biblias y videos antes de cambiar de distribución; comprueba tus contenidos locales y la proyección en el equipo de destino.
+La publicación 0.8.1 corresponde al motor anterior y conserva su propio canal de actualización. Descarga e instala manualmente el instalador Tauri de la nueva publicación cuando esté disponible. Conserva un respaldo de tus datos y tus carpetas originales de Biblias y videos antes de cambiar de distribución; comprueba tus contenidos locales y la proyección en el equipo de destino.
 
-El manifiesto `latest.yml` y los archivos `.blockmap` de Electron 0.8.x no sirven para actualizar Tauri. El canal nuevo usa `latest.json` y la firma `.exe.sig` de Tauri. No se modifica la publicación 0.8.1 ni se reutiliza su manifiesto. Las actualizaciones posteriores dentro de Tauri comprueban la clave pública incluida en la aplicación.
+El manifiesto `latest.yml` y los archivos `.blockmap` de las versiones 0.8.x no sirven para actualizar Tauri. El canal nuevo usa `latest.json` y la firma `.exe.sig` de Tauri. No se modifica la publicación 0.8.1 ni se reutiliza su manifiesto. Las actualizaciones posteriores dentro de Tauri comprueban la clave pública incluida en la aplicación.
 
 ## Compilar y verificar
 
@@ -26,7 +26,7 @@ cargo test --manifest-path src-tauri/Cargo.toml --locked
 cargo clippy --manifest-path src-tauri/Cargo.toml --locked --all-targets -- -D warnings
 ```
 
-`pnpm build` prepara la interfaz, los archivos del control remoto y las herramientas multimedia nativas. `scripts/prepare-tauri.mjs` copia FFmpeg/FFprobe a `src-tauri/tools`, carpeta excluida de Git. El instalador empaqueta esos ejecutables; no necesita Node.js ni Electron en el equipo de la iglesia.
+`pnpm build` prepara la interfaz, los archivos del control remoto y las herramientas multimedia nativas. `scripts/prepare-tauri.mjs` copia FFmpeg/FFprobe a `src-tauri/tools`, carpeta excluida de Git. El instalador empaqueta esos ejecutables; no necesita Node.js en el equipo de la iglesia.
 
 ## Firma local
 

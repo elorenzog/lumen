@@ -12,7 +12,7 @@ Abre [las publicaciones de LUMEN](https://github.com/elorenzog/lumen/releases/la
 - **latest.json** y **.exe.sig**: manifiesto y firma del actualizador Tauri.
 - **SHA256SUMS.txt**: sumas de verificación de los archivos publicados.
 
-La versión 0.9.0 está en migración a Tauri; la publicación Electron 0.8.1 sigue disponible hasta publicar la nueva distribución. La primera instalación Tauri se realiza manualmente. El canal Electron `latest.yml` no actualiza Tauri. Haz un respaldo de tus datos y comprueba tus Biblias, videos y proyector al cambiar de distribución.
+La versión 0.9.0 utiliza Tauri 2 con un motor nativo en Rust. La primera instalación Tauri se realiza manualmente. El canal `latest.yml` de las versiones 0.8.x no actualiza Tauri. Haz un respaldo de tus datos y comprueba tus Biblias, videos y proyector al cambiar de distribución.
 
 LUMEN usa WebView2 del sistema. Si falta, el instalador necesita Internet para obtenerlo; después, Biblia, búsqueda y reproducción funcionan sin conexión.
 
@@ -71,7 +71,7 @@ El flujo de publicaciones está inspirado en [Cantoral](https://github.com/xlCya
 
 ## Desarrollo y verificación
 
-Requisitos en Windows: Node.js 26, pnpm 10.32.1, Rust estable/MSVC, herramientas de C++ de Visual Studio y WebView2. [Requisitos de Tauri](https://v2.tauri.app/start/prerequisites/). La distribución usa un backend Rust y WebView2; no requiere Node.js ni Electron en el equipo de destino.
+Requisitos en Windows: Node.js 26, pnpm 10.32.1, Rust estable/MSVC, herramientas de C++ de Visual Studio y WebView2. [Requisitos de Tauri](https://v2.tauri.app/start/prerequisites/). La distribución usa un backend Rust y WebView2; no requiere Node.js en el equipo de destino.
 
 ```sh
 pnpm install --frozen-lockfile
@@ -88,6 +88,8 @@ pnpm dev
 
 `pnpm build` compila la interfaz y prepara FFmpeg/FFprobe como recursos nativos. Para crear el instalador usa `pnpm tauri build --bundles nsis` con la clave de firma del actualizador configurada localmente. El workflow verifica JavaScript y Rust; una etiqueta de versión solo publica si dispone de la clave de firma. Si falta, genera un instalador de revisión sin feed y una advertencia; la ejecución manual nunca publica. [Instrucciones de firma y publicación](docs/ACTUALIZACIONES_Y_PUBLICACION.md).
 
-Después de compilar, `pnpm test:e2e` ejecuta el flujo nativo de Tauri con datos aislados. Los antiguos scripts `e2e*.mjs` de Electron se conservan como referencia histórica y no verifican el backend Tauri. La pantalla física y los teléfonos reales deben verificarse en el equipo de destino. macOS/Linux requieren compilación y pruebas en sus sistemas.
+Después de compilar, `pnpm test:e2e` ejecuta el flujo nativo de Tauri con datos aislados. La pantalla física y los teléfonos reales deben verificarse en el equipo de destino. macOS/Linux requieren compilación y pruebas en sus sistemas.
 
 Tauri 2, Rust, TypeScript estricto, Vite, SQLite, Zod, Lucide y FFmpeg/FFprobe. [Avisos de terceros](THIRD_PARTY_NOTICES.md). No se incluyen NDI ni Chromecast.
+
+Las pruebas actuales cubren la interfaz y los contratos compartidos en TypeScript, el motor nativo en Rust y los flujos completos en Tauri/WebView2. El conversor independiente de extractos BibleShow se encuentra en tools/bibleshow-conversion.ts y se ejecuta con node scripts/convert-bibleshow.mjs <entrada> <salida>. Las herramientas y pruebas del motor anterior fueron retiradas; sus versiones históricas siguen disponibles en Git.
