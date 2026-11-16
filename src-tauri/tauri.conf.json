@@ -36,7 +36,9 @@
       "../resources/hymn-numbering.json": "resources/hymn-numbering.json",
       "../resources/hymnal-1962.json": "resources/hymnal-1962.json",
       "tools/": "tools/",
-      "../dist/remote/": "remote/"
+      "../dist/remote/": "remote/",
+      "../THIRD_PARTY_NOTICES.md": "THIRD_PARTY_NOTICES.md",
+      "../docs/FUENTES_Y_TRADUCCIONES.md": "FUENTES_Y_TRADUCCIONES.md"
     },
     "shortDescription": "Biblia e Himnario Adventista",
     "longDescription": "La Palabra que ilumina, la alabanza que inspira.",

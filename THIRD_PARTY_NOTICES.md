@@ -39,6 +39,8 @@ Los textos completos de licencia de las dependencias se conservan en sus paquete
 
 Se invocan como ejecutables independientes. Las compilaciones pueden incluir componentes GPL, entre ellos libx264. Las licencias y condiciones de estos binarios se aplican a su redistribución.
 
+El instalador conserva estos avisos y los archivos de licencia y origen suministrados con las herramientas multimedia, junto a FFmpeg y FFprobe.
+
 - ffmpeg-static: GPL-3.0-or-later. https://github.com/eugeneware/ffmpeg-static
 - Binarios y documentación de compilación: https://github.com/eugeneware/ffmpeg-static/releases
 - ffprobe-static: https://github.com/joshwnj/ffprobe-static

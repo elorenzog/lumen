@@ -14,4 +14,15 @@ for(const [name,source] of binaries){
   try{current=await stat(target);}catch(error){if(!(error instanceof Error&&'code'in error&&error.code==='ENOENT'))throw error;}
   if(current?.size!==(await stat(source)).size)await copyFile(source,target);
 }
+const notices=[
+  ['ffmpeg-static','LICENSE','ffmpeg-static-LICENSE.txt'],
+  ['ffmpeg-static',`ffmpeg${extension}.LICENSE`,'ffmpeg-binary-LICENSE.txt'],
+  ['ffmpeg-static',`ffmpeg${extension}.README`,'ffmpeg-binary-README.txt'],
+  ['ffprobe-static','LICENSE','ffprobe-static-LICENSE.txt'],
+  ['ffprobe-static','README.md','ffprobe-static-README.md'],
+];
+for(const [dependency,file,target] of notices){
+  const root=path.dirname(require.resolve(`${dependency}/package.json`));
+  await copyFile(path.join(root,file),path.join(directory,target));
+}
 console.log('Herramientas multimedia nativas preparadas.');
