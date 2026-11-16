@@ -39,7 +39,13 @@ impl RemoteAdapter for CoreRemote {
         })
     }
     fn command(&self, input: RemoteCommand) -> RemoteFuture<'_, RemoteState> {
-        Box::pin(async move { self.core()?.remote_command(input).await })
+        Box::pin(async move {
+            let core = self.core()?;
+            // Accepted desktop commands must survive their HTTP connection closing.
+            tokio::spawn(async move { core.remote_command(input).await })
+                .await
+                .map_err(|error| Error::external("remote", error))?
+        })
     }
 }
 #[derive(Clone, Copy)]
