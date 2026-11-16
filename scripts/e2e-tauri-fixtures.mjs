@@ -3,6 +3,7 @@ import { spawn } from 'node:child_process';
 import { copyFile, mkdir, readFile, readdir, unlink, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { invoke, snapshot, waitForNative } from './e2e-tauri-native.mjs';
+import { diagnosticReplacer } from './e2e-tauri-diagnostics.mjs';
 
 async function dialogs(data,selection){await writeFile(path.join(data,'dialogs.json'),JSON.stringify(selection));}
 async function playing(output){
@@ -155,7 +156,7 @@ export async function exerciseNativeFixtures({page,output,data,evidence}){
     return {requestAt,responseAt:Date.now(),url:location.href,title:document.title,window:window.__TAURI_INTERNALS__.metadata.currentWindow.label,response};
   }));
   const imported=observations[0].response.data.hymns;
-  await writeFile(path.join(evidence,'native-hymn-identities.json'),JSON.stringify({expectedProfile:data,first:hymn,waitResult,observations,imported},null,2));
+  await writeFile(path.join(evidence,'native-hymn-identities.json'),JSON.stringify({expectedProfile:data,first:hymn,waitResult,observations,imported},diagnosticReplacer,2));
   assert.equal(waitResult,true,'Playwright wait actually observed two native hymns');
   const other=imported.find(item=>item.id!==hymn.id);
   assert.ok(other,'Native snapshot exposes a distinct ID for the replacement hymn');
