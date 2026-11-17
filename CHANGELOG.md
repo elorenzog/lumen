@@ -1,5 +1,15 @@
 # Cambios de LUMEN
 
+## 0.9.1
+
+- Configuración por pestañas, temas claro/oscuro/sistema y tamaños de interfaz persistentes.
+- Selects con el diseño de LUMEN, navegación por teclado y menús adaptados al tema.
+- Guía de ayuda integrada y créditos con enlaces a los perfiles de los desarrolladores.
+- Opción para iniciar LUMEN minimizado con Windows, conservando la biblioteca y sin abrir la proyección.
+- La casilla de inicio automático refleja los cambios del motor sin salir de Configuración.
+- Publicación de un instalador Tauri firmado y del manifiesto de actualización para Windows x64.
+- Las instalaciones Tauri 0.9.0 pueden actualizarse desde la aplicación; las versiones Electron 0.8.x requieren instalar manualmente esta versión.
+
 ## 0.9.0
 
 - Migración del escritorio a Tauri 2 y Rust, con WebView2 en Windows y la interfaz de Biblia e himnario existente.

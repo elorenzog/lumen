@@ -1,6 +1,6 @@
 {
   "name": "lumen",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "description": "Biblia e Himnario Adventista con proyección independiente",
   "private": true,
   "type": "module",
