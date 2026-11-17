@@ -49,6 +49,9 @@ pub fn run() {
             app.manage(Arc::clone(&core));
             let main = platform::create_main(&handle, &paths.profile)?;
             if std::env::var("LUMEN_HEADLESS").as_deref() != Ok("1") {
+                if platform::startup::launch_options()?.minimized {
+                    main.minimize()?;
+                }
                 main.show()?;
             }
             platform::watch_displays(handle);

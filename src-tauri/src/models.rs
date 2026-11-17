@@ -129,6 +129,7 @@ pub struct BackgroundMedia {
 #[derive(Clone, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Snapshot {
+    pub startup: crate::platform::startup::StartupInfo,
     #[serde(flatten)]
     pub saved: Saved,
     pub updates: UpdateInfo,

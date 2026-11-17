@@ -101,3 +101,11 @@ Después de compilar, `pnpm test:e2e` ejecuta el flujo nativo de Tauri con datos
 Tauri 2, Rust, TypeScript estricto, Vite, SQLite, Zod, Lucide y FFmpeg/FFprobe. [Avisos de terceros](THIRD_PARTY_NOTICES.md). No se incluyen NDI ni Chromecast.
 
 Las pruebas actuales cubren la interfaz y los contratos compartidos en TypeScript, el motor nativo en Rust y los flujos completos en Tauri/WebView2. El conversor independiente de extractos BibleShow se encuentra en tools/bibleshow-conversion.ts y se ejecuta con node scripts/convert-bibleshow.mjs <entrada> <salida>. Las herramientas y pruebas del motor anterior fueron retiradas; sus versiones históricas siguen disponibles en Git.
+
+## Inicio automático en Windows
+
+En **Configuración → General → Inicio de Windows**, marca **Iniciar LUMEN con Windows** para abrir la aplicación minimizada en la barra de tareas al iniciar sesión. La opción está desactivada inicialmente; puedes desmarcarla para quitar el inicio automático. No requiere permisos de administrador ni activa la proyección o el control remoto. Conserva la biblioteca que estás usando.
+
+Si mueves la aplicación portátil, vuelve a activar la opción desde la nueva ubicación. Una ruta demasiado larga para el inicio de Windows muestra un error en lugar de guardar una configuración inválida.
+
+La entrada por usuario ejecuta `LUMEN.exe --autostart --profile "<ruta absoluta de la biblioteca>"`. Sin `--autostart`, LUMEN abre normalmente; `--profile` permite conservar explícitamente el perfil en un inicio automático.

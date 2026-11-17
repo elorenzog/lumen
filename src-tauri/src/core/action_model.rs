@@ -27,6 +27,9 @@ pub enum RemoteOperation {
     rename_all_fields = "camelCase"
 )]
 pub enum Action {
+    StartupPreference {
+        enabled: bool,
+    },
     OpenCredit {
         github: String,
     },
@@ -108,6 +111,12 @@ fn unknown_edition() -> String {
 }
 impl Action {
     pub fn authorize(&self, source: &str) -> Result<()> {
+        if matches!(self, Self::StartupPreference { .. }) && source != "main" {
+            return Err(Error::new(
+                "permission",
+                "Esta acción solo está disponible para el operador.",
+            ));
+        }
         if matches!(self, Self::OpenCredit { .. }) && source != "main" {
             return Err(Error::new(
                 "permission",
@@ -122,7 +131,8 @@ impl Action {
                 | Self::MediaError { .. }
                 | Self::BackgroundError { .. }
                 | Self::CloseOutput => Ok(()),
-                Self::OpenCredit { .. }
+                Self::StartupPreference { .. }
+                | Self::OpenCredit { .. }
                 | Self::Updates { .. }
                 | Self::UpdatePreference { .. }
                 | Self::RemoteControl { .. }
@@ -168,7 +178,8 @@ impl Action {
                 Slide::Hymn { .. } => false,
                 Slide::Verse { .. } | Slide::Welcome { .. } => true,
             },
-            Self::Updates { .. }
+            Self::StartupPreference { .. }
+            | Self::Updates { .. }
             | Self::UpdatePreference { .. }
             | Self::RemoteControl { .. }
             | Self::Snapshot

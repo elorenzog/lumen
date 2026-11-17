@@ -3,6 +3,7 @@ import { defaults, hymnSchema, snapshotSchema, welcome } from '../src/shared/con
 import type { Bible, Output, Snapshot } from '../src/shared/contracts';
 import type { UIState, View } from '../src/ui/state';
 import { inspector } from '../src/ui/inspector';
+import { settingsPage } from '../src/ui/settings';
 
 vi.mock('lucide', async importOriginal => ({
   ...await importOriginal<typeof import('lucide')>(),
@@ -17,6 +18,18 @@ function fixture(view: View, output: Partial<Output> = {}): UIState {
 }
 
 describe('Given projection controls for different preparation sections', () => {
+  it('offers reversible minimized Windows startup without changing projection settings', () => {
+    const state = fixture('ajustes');
+    for (const enabled of [false, true]) {
+      state.snapshot = snapshotSchema.parse({ ...state.snapshot, startup: { supported: true, enabled, error: null } });
+      const html = settingsPage(state);
+      expect(html).toContain('id="start-with-windows"');
+      expect(html).toContain('Iniciar LUMEN con Windows');
+      expect(html).toContain('minimizada');
+      expect(html).toMatch(enabled ? /id="start-with-windows"[^>]*checked/ : /id="start-with-windows"(?![^>]*checked)/);
+      expect(state.snapshot.settings).toEqual(defaults.settings);
+    }
+  });
   it('exposes audio controls without verse controls when preparing a hymn', () => {
     const html = inspector(fixture('himnario'));
     expect(html).toContain('data-projection-context="himnario"');

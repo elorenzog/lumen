@@ -6,6 +6,11 @@ import { remoteSettings } from './remote-settings';
 import type { UIState } from './state';
 import { translationsSettings } from './translations';
 import { uiThemeSettings } from './ui-theme';
+import type { Snapshot } from '../shared/contracts';
+
+function startupSettings(startup: Snapshot['startup']): string {
+  return `<section class="settings-card startup-settings"><h2>Inicio de Windows</h2><label class="auto-label" for="start-with-windows"><input type="checkbox" id="start-with-windows" ${startup.enabled ? 'checked' : ''} ${!startup.supported || startup.error ? 'disabled' : ''} aria-describedby="startup-note"><span>Iniciar LUMEN con Windows</span></label><p class="muted" id="startup-note">Al iniciar sesión, LUMEN se abrirá minimizada en la barra de tareas, con esta biblioteca y sin activar la proyección. Desmarca la opción para quitar el inicio automático.</p>${startup.error ? `<p role="alert">No se pudo consultar el inicio automático: ${esc(startup.error)}</p>` : !startup.supported ? '<p class="small-note">Disponible únicamente en Windows.</p>' : ''}<p class="small-note">Si cambias la ubicación de LUMEN, vuelve a activar esta opción desde la nueva ubicación.</p></section>`;
+}
 
 const tabs = [
   { id: 'general', label: 'General' },
@@ -40,7 +45,7 @@ function projectionSettings(state: UIState): string {
 
 export function settingsPage(state: UIState): string {
   const active = state.settingsTab ?? 'general';
-  const content = active === 'general' ? `${uiThemeSettings()}<section class="settings-card"><h2>${icon('keyboard')} Atajos del teclado</h2><p class="muted">También puedes trabajar con el teclado.</p><dl class="shortcuts"><div><dt>Versículo anterior / siguiente</dt><dd>← / →</dd></div><div><dt>Mostrar la selección</dt><dd>Ctrl + Enter</dd></div><div><dt>Ocultar / mostrar pantalla</dt><dd>B</dd></div><div><dt>Cerrar la pantalla de salida</dt><dd>Esc en la salida</dd></div></dl></section>`
+  const content = active === 'general' ? `${uiThemeSettings()}${startupSettings(state.snapshot.startup)}<section class="settings-card"><h2>${icon('keyboard')} Atajos del teclado</h2><p class="muted">También puedes trabajar con el teclado.</p><dl class="shortcuts"><div><dt>Versículo anterior / siguiente</dt><dd>← / →</dd></div><div><dt>Mostrar la selección</dt><dd>Ctrl + Enter</dd></div><div><dt>Ocultar / mostrar pantalla</dt><dd>B</dd></div><div><dt>Cerrar la pantalla de salida</dt><dd>Esc en la salida</dd></div></dl></section>`
     : active === 'biblioteca' ? `<section class="settings-card"><h2>${icon('music')} Himnario</h2><p class="muted">${state.snapshot.hymns.length} archivos disponibles. Agrega tus vídeos y elige su edición desde el Himnario.</p><div class="settings-import-actions">${button('import-folder', 'Agregar carpeta de himnos', 'folder', 'secondary', state.busy ? 'disabled' : '')}${button('view-himnario', 'Ir al Himnario', 'music', 'ghost')}</div></section>${translationsSettings(state)}`
     : active === 'proyeccion' ? projectionSettings(state)
     : active === 'remoto' ? remoteSettings(state)

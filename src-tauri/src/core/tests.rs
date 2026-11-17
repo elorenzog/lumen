@@ -2,6 +2,18 @@ use super::playback::Playback;
 use crate::models::{Action, Slide};
 
 #[test]
+fn startup_preference_is_operator_only() {
+    let action: Action =
+        serde_json::from_value(serde_json::json!({"type":"startup-preference","enabled":true}))
+            .unwrap();
+    assert!(action.validate().is_ok());
+    assert!(action.authorize("main").is_ok());
+    for source in ["remote", "projection", "unknown"] {
+        assert!(action.authorize(source).is_err());
+    }
+}
+
+#[test]
 fn developer_profiles_are_known_https_urls() {
     assert_eq!(
         crate::platform::credit_url("elorenzog").unwrap(),

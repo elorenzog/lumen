@@ -1,4 +1,4 @@
-import { bibleSchema, LumenError, snapshotSchema, welcome,verseSchema } from './shared/contracts';
+import { bibleSchema, LumenError, snapshotSchema, startupInfoSchema, welcome,verseSchema } from './shared/contracts';
 import { z } from 'zod';
 import type { Action, ProgramItem, Slide, Snapshot, Verse } from './shared/contracts';
 import { formatTime, playbackPosition, referenceQuery } from './shared/domain';
@@ -142,6 +142,7 @@ export async function operator(root:HTMLElement):Promise<void>{
     guarded((async()=>{
       if(base.change(target)||await appearance.change(target)||appearance.input(target)||await features.change(target))return;
       switch(target.id){
+        case 'start-with-windows':if(target instanceof HTMLInputElement){target.disabled=true;try{state.snapshot={...state.snapshot,startup:startupInfoSchema.parse(await invoke({type:'startup-preference',enabled:target.checked}))};}finally{render();}}break;
         case 'remote-address':state.remoteUrl=target.value;render();break;
         case 'check-updates-startup':if(target instanceof HTMLInputElement)await invoke({type:'update-preference',checkAtStartup:target.checked});render();break;
         case 'translation':{state.bible=bibleSchema.parse(await invoke({type:'bible',id:target.value}));state.selected=state.bible.verses.filter(v=>v.book===state.book&&v.chapter===state.chapter&&v.verse===(state.selected[0]?.verse??1));state.searchResults=null;if(state.comparisonId===state.bible.id){state.comparison=null;state.comparisonId='';}render();if(state.query)await search();break;}

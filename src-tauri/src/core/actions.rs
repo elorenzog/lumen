@@ -11,6 +11,12 @@ use std::sync::Arc;
 impl Core {
     pub(super) async fn dispatch(self: &Arc<Self>, action: Action) -> Result<Value> {
         match action {
+            Action::StartupPreference { enabled } => {
+                let profile = self.store.lock().directory.clone();
+                platform::startup::set_enabled(enabled, &profile)?;
+                self.broadcast();
+                Ok(to_value(platform::startup::info())?)
+            }
             Action::OpenCredit { github } => {
                 platform::open_credit(&self.app, &github)?;
                 Ok(Value::Null)

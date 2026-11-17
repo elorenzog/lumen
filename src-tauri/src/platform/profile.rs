@@ -36,6 +36,9 @@ pub fn paths(app: &tauri::AppHandle) -> Result<Paths> {
 }
 
 fn profile_directory(app: &tauri::AppHandle) -> Result<PathBuf> {
+    if let Some(path) = super::startup::launch_options()?.profile {
+        return Ok(path);
+    }
     if let Some(path) = std::env::var_os("LUMEN_DATA_DIR") {
         let path = PathBuf::from(path);
         if !path.is_absolute() {

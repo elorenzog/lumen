@@ -29,7 +29,7 @@ export function operatorRenderer(root:HTMLElement,state:UIState,syncMedia:()=>vo
   let libraryKey='';
   let selection:UIState['selected']|undefined;
   let passage='';
-  const contentKey=():string=>JSON.stringify([state.snapshot.hymns,state.snapshot.bibles,state.snapshot.program,state.snapshot.backgrounds,state.snapshot.remote,state.view==='ajustes'?[state.snapshot.settings,state.snapshot.updates,state.snapshot.output.connected,Boolean(state.snapshot.output.preparing)]:null]);
+  const contentKey=():string=>JSON.stringify([state.snapshot.hymns,state.snapshot.bibles,state.snapshot.program,state.snapshot.backgrounds,state.snapshot.remote,state.view==='ajustes'?[state.snapshot.startup,state.snapshot.settings,state.snapshot.updates,state.snapshot.output.connected,Boolean(state.snapshot.output.preparing)]:null]);
   const syncPreparation=():void=>{
     if(state.view!=='himnario')return;
     const preparing=state.snapshot.output.preparing;

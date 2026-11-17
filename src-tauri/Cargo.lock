@@ -2314,6 +2314,7 @@ dependencies = [
  "tracing",
  "unicode-normalization",
  "uuid",
+ "winreg",
  "zip 2.6.1",
 ]
 

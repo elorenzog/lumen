@@ -109,6 +109,7 @@ impl Core {
             .clone()
             .map_or_else(Default::default, |service| service.info());
         Ok(Snapshot {
+            startup: crate::platform::startup::info(),
             saved,
             updates: self.updates.snapshot(),
             remote,

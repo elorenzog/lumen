@@ -1,5 +1,6 @@
 mod dialogs;
 mod profile;
+pub mod startup;
 mod windows;
 
 pub use dialogs::{PickRequest, pick_files};
