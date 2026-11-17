@@ -1,16 +1,22 @@
-# LUMEN 0.8
+# LUMEN 0.9 · Tauri
 
 **Biblia e Himnario Adventista** · La Palabra que ilumina, la alabanza que inspira.
 
 Aplicación de escritorio en español para preparar pasajes, himnos y el programa del culto. La proyección ocupa la pantalla designada sin bordes ni barra de título, mientras el operador conserva su ventana. La Biblia, búsqueda y reproducción funcionan sin Internet.
 
+Al pie del menú encontrarás **¿Cómo funciona?**, con una guía sencilla de proyección, Biblia, himnario, programa y control remoto. Justo debajo está **Ajustes**.
+
 ## Descargar e instalar
 
 Abre [las publicaciones de LUMEN](https://github.com/elorenzog/lumen/releases/latest).
 
-- **LUMEN-Setup**: instalador de Windows, selección de carpeta, accesos directos y actualizaciones dentro de la aplicación.
-- **LUMEN-Portable**: ejecución sin instalar; se reemplaza manualmente para actualizar.
+- **LUMEN_*_x64-setup.exe**: instalador NSIS de Tauri para Windows x64, con accesos directos y actualizaciones verificadas por firma dentro de la aplicación.
+- **latest.json** y **.exe.sig**: manifiesto y firma del actualizador Tauri.
 - **SHA256SUMS.txt**: sumas de verificación de los archivos publicados.
+
+La versión 0.9.0 utiliza Tauri 2 con un motor nativo en Rust. La primera instalación Tauri se realiza manualmente. El canal `latest.yml` de las versiones 0.8.x no actualiza Tauri. Haz un respaldo de tus datos y comprueba tus Biblias, videos y proyector al cambiar de distribución.
+
+LUMEN usa WebView2 del sistema. Si falta, el instalador necesita Internet para obtenerlo; después, Biblia, búsqueda y reproducción funcionan sin conexión.
 
 Los videos de himnos y las Biblias locales adicionales no se distribuyen. El instalador no tiene certificado Authenticode configurado; Windows puede mostrar una advertencia sobre el editor.
 
@@ -20,7 +26,7 @@ Se incluyen **Reina-Valera 1909** y **Santa Biblia libre Latinoamericano (BLL)**
 
 Busca referencias o palabras, compara traducciones y selecciona libro → capítulo → versículo. Puedes seleccionar hasta seis versículos y pulsar **Proyectar selección**; doble clic también proyecta. La proyección automática es opcional.
 
-Admite JSON LUMEN/Scrollmapper, XML Zefania, USFM/SFM y ZIP de libros USFM. Para una colección de JSON de LUMEN, usa **Ajustes → Traducciones sin conexión → Importar carpeta de Biblias**. Conserva sus identificadores y omite las ediciones ya instaladas. Copia tu carpeta local a la nueva PC e impórtala allí; no se sube a GitHub. Se conservan avisos y permisos de cada edición. [Fuentes y formatos](docs/FUENTES_Y_TRADUCCIONES.md).
+Admite JSON LUMEN/Scrollmapper, XML Zefania, USFM/SFM y ZIP de libros USFM. Para una colección de JSON de LUMEN, usa **Ajustes → Biblioteca → Traducciones sin conexión → Importar carpeta de Biblias**. Conserva sus identificadores y omite las ediciones ya instaladas. Copia tu carpeta local a la nueva PC e impórtala allí; no se sube a GitHub. Se conservan avisos y permisos de cada edición. [Fuentes y formatos](docs/FUENTES_Y_TRADUCCIONES.md).
 
 ## Himnario y programa
 
@@ -34,9 +40,15 @@ Puedes editar metadatos, marcar favoritos y preparar pasajes e himnos en **Progr
 
 ## Pantalla y apariencia
 
+**Ajustes** organiza la configuración en pestañas: General, Biblioteca, Proyección, Control remoto y Acerca de. En **General** elige **Claro**, **Oscuro** o **Seguir al sistema** y el tamaño **Normal**, **Grande** o **Muy grande**. Las preferencias se recuerdan al abrir LUMEN; el tema del operador no cambia la pantalla de la iglesia. Ctrl + / Ctrl − ajustan la interfaz y Ctrl 0 vuelve a Normal.
+
+La vista diaria conserva la selección rápida y los controles principales. **Ver pantalla de la iglesia** despliega el monitor en vivo; pausar, detener y ocultar siguen disponibles sin abrir esa vista.
+
+La comprobación nativa de pestañas, temas, tamaños, persistencia y proyección independiente se ejecuta con `node scripts/e2e-ui-theme.mjs` después de compilar Tauri. Usa un perfil temporal y guarda sus capturas en `test-results/ui-theme/`.
+
 Conecta el proyector como pantalla extendida y selecciónalo en **Proyección**. En **Apariencia de la pantalla → Personalizar fondo y texto**, prepara colores, degradado, imagen/video silencioso, tipografía, alineación y márgenes. **Aplicar al proyector** confirma el borrador; **Cancelar** conserva el fondo activo.
 
-En **Ajustes → Imagen de la pantalla base**, elige una imagen, ajusta si debe mostrarse completa o llenar la pantalla y pulsa **Aplicar cambios**. Se guarda una copia offline, independiente de los versículos y del video del himno.
+En **Ajustes → Proyección → Imagen de la pantalla base**, elige una imagen, ajusta si debe mostrarse completa o llenar la pantalla y pulsa **Aplicar cambios**. Se guarda una copia offline, independiente de los versículos y del video del himno.
 
 ## Control remoto desde un teléfono
 
@@ -48,12 +60,12 @@ Pulsa **Ajustes → Control remoto → Activar control remoto**. Conecta el tel�
 
 En **Ajustes → Acerca de LUMEN**, busca versiones de GitHub, elige si quieres comprobar al iniciar y descarga una actualización disponible. Instalar requiere una acción explícita y cerrar la proyección. No se reinicia automáticamente durante el culto.
 
-| Desarrollador | Participación |
-| --- | --- |
-| Eliezer Lorenzo | Desarrollo y Diseño |
-| Ezequiel Sierra | Desarrollo |
+| Desarrollador | Participación | GitHub |
+| --- | --- | --- |
+| Eliezer Lorenzo | Desarrollo y Diseño | [@elorenzog](https://github.com/elorenzog) |
+| Ezequiel Sierra | Desarrollo | [@xlCyanz](https://github.com/xlCyanz) |
 
-El flujo de publicaciones está inspirado en [Cantoral](https://github.com/xlCyanz/cantoral), adaptado a Electron y NSIS. [Cómo publicar una versión](docs/ACTUALIZACIONES_Y_PUBLICACION.md).
+El flujo de publicaciones está inspirado en [Cantoral](https://github.com/xlCyanz/cantoral), adaptado a Tauri y NSIS con una clave propia de LUMEN. La firma del actualizador es independiente de un certificado Authenticode de Windows. [Cómo publicar una versión](docs/ACTUALIZACIONES_Y_PUBLICACION.md).
 
 ## Atajos
 
@@ -67,18 +79,33 @@ El flujo de publicaciones está inspirado en [Cantoral](https://github.com/xlCya
 
 ## Desarrollo y verificación
 
-Requisitos: Node.js 26 y pnpm 10.32.1. El instalador/portable incluye su motor.
+Requisitos en Windows: Node.js 26, pnpm 10.32.1, Rust estable/MSVC, herramientas de C++ de Visual Studio y WebView2. [Requisitos de Tauri](https://v2.tauri.app/start/prerequisites/). La distribución usa un backend Rust y WebView2; no requiere Node.js en el equipo de destino.
 
 ```sh
 pnpm install --frozen-lockfile
 pnpm exec tsc --noEmit
 pnpm test
+node --test scripts/release-metadata.test.mjs
 pnpm build
-pnpm start
+cargo fmt --manifest-path src-tauri/Cargo.toml --all --check
+cargo check --manifest-path src-tauri/Cargo.toml --locked
+cargo test --manifest-path src-tauri/Cargo.toml --locked
+cargo clippy --manifest-path src-tauri/Cargo.toml --locked --all-targets -- -D warnings
+pnpm dev
 ```
 
-Para recarga de desarrollo usa `pnpm dev`. Para instalar Windows ejecuta `pnpm build` y `pnpm dist:win`. Publicar una etiqueta `v` seguida de la versión dispara comprobaciones, empaquetado y GitHub Release.
+`pnpm build` compila la interfaz y prepara FFmpeg/FFprobe como recursos nativos. Para crear el instalador usa `pnpm tauri build --bundles nsis` con la clave de firma del actualizador configurada localmente. El workflow verifica JavaScript y Rust; una etiqueta de versión solo publica si dispone de la clave de firma. Si falta, genera un instalador de revisión sin feed y una advertencia; la ejecución manual nunca publica. [Instrucciones de firma y publicación](docs/ACTUALIZACIONES_Y_PUBLICACION.md).
 
-Después de compilar, `node scripts/e2e.mjs` y `node scripts/e2e-remote.mjs` comprueban flujos nativos con datos aislados. La pantalla física y los teléfonos reales deben verificarse en el equipo de destino. macOS/Linux requieren compilación y pruebas en sus sistemas.
+Después de compilar, `pnpm test:e2e` ejecuta el flujo nativo de Tauri con datos aislados. La pantalla física y los teléfonos reales deben verificarse en el equipo de destino. macOS/Linux requieren compilación y pruebas en sus sistemas.
 
-Electron, TypeScript estricto, Vite, SQLite, Zod, Lucide y FFmpeg/FFprobe. [Avisos de terceros](THIRD_PARTY_NOTICES.md). No se incluyen NDI ni Chromecast.
+Tauri 2, Rust, TypeScript estricto, Vite, SQLite, Zod, Lucide y FFmpeg/FFprobe. [Avisos de terceros](THIRD_PARTY_NOTICES.md). No se incluyen NDI ni Chromecast.
+
+Las pruebas actuales cubren la interfaz y los contratos compartidos en TypeScript, el motor nativo en Rust y los flujos completos en Tauri/WebView2. El conversor independiente de extractos BibleShow se encuentra en tools/bibleshow-conversion.ts y se ejecuta con node scripts/convert-bibleshow.mjs <entrada> <salida>. Las herramientas y pruebas del motor anterior fueron retiradas; sus versiones históricas siguen disponibles en Git.
+
+## Inicio automático en Windows
+
+En **Configuración → General → Inicio de Windows**, marca **Iniciar LUMEN con Windows** para abrir la aplicación minimizada en la barra de tareas al iniciar sesión. La opción está desactivada inicialmente; puedes desmarcarla para quitar el inicio automático. No requiere permisos de administrador ni activa la proyección o el control remoto. Conserva la biblioteca que estás usando.
+
+Si mueves la aplicación portátil, vuelve a activar la opción desde la nueva ubicación. Una ruta demasiado larga para el inicio de Windows muestra un error en lugar de guardar una configuración inválida.
+
+La entrada por usuario ejecuta `LUMEN.exe --autostart --profile "<ruta absoluta de la biblioteca>"`. Sin `--autostart`, LUMEN abre normalmente; `--profile` permite conservar explícitamente el perfil en un inicio automático.

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { convertBibleShow } from '../electron/bibleshow-conversion';
+import { convertBibleShow } from '../tools/bibleshow-conversion';
 
 const source = (rows: readonly object[]) => ({
   file: 'DHH1994.bib',

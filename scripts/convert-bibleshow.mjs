@@ -6,7 +6,7 @@ import path from 'node:path';
 const input = path.resolve(process.argv[2] ?? 'test-results/bibleshow-interop');
 const output = path.resolve(process.argv[3] ?? 'imports');
 const archive = path.join(output, 'bibleshow-source');
-const compiled = await build({ entryPoints: ['electron/bibleshow-conversion.ts'], bundle: true, write: false, platform: 'node', format: 'esm' });
+const compiled = await build({ entryPoints: ['tools/bibleshow-conversion.ts'], bundle: true, write: false, platform: 'node', format: 'esm' });
 const module = compiled.outputFiles[0];
 if (!module) throw new Error('No se generó el conversor.');
 const { convertBibleShow } = await import(`data:text/javascript;base64,${Buffer.from(module.contents).toString('base64')}`);

@@ -1,102 +1,44 @@
 {
   "name": "lumen",
-  "version": "0.8.1",
+  "version": "0.9.0",
   "description": "Biblia e Himnario Adventista con proyección independiente",
   "private": true,
   "type": "module",
-  "main": "dist-electron/main.cjs",
   "packageManager": "pnpm@10.32.1",
   "scripts": {
-    "dev": "node scripts/dev.mjs",
-    "build": "tsc --noEmit && node scripts/build.mjs",
-    "start": "electron .",
+    "dev": "tauri dev",
+    "build": "tsc --noEmit && node scripts/build.mjs && node scripts/prepare-tauri.mjs",
+    "start": "tauri dev",
     "test": "vitest run",
-    "test:e2e": "node scripts/e2e.mjs",
-    "dist": "pnpm build && node scripts/package.mjs",
+    "test:e2e": "node scripts/e2e-tauri.mjs",
+    "dist": "tauri build",
     "preview": "vite --host 127.0.0.1",
-    "dist:win": "node scripts/package.mjs --win --publish never"
-  },
-  "build": {
-    "appId": "app.lumen.desktop",
-    "productName": "LUMEN",
-    "directories": {
-      "output": "release"
-    },
-    "files": [
-      "dist/**/*",
-      "dist-electron/**/*",
-      "package.json",
-      "README.md",
-      "THIRD_PARTY_NOTICES.md",
-      "docs/FUENTES_Y_TRADUCCIONES.md"
-    ],
-    "asarUnpack": [
-      "node_modules/ffmpeg-static/**/*",
-      "node_modules/ffprobe-static/**/*"
-    ],
-    "win": {
-      "target": [
-        "nsis",
-        "portable"
-      ],
-      "signAndEditExecutable": false
-    },
-    "mac": {
-      "target": [
-        "dmg"
-      ],
-      "category": "public.app-category.reference"
-    },
-    "linux": {
-      "target": [
-        "AppImage"
-      ],
-      "category": "Education"
-    },
-    "artifactName": "LUMEN-${version}-${os}-${arch}.${ext}",
-    "nsis": {
-      "oneClick": false,
-      "perMachine": false,
-      "allowToChangeInstallationDirectory": true,
-      "deleteAppDataOnUninstall": false,
-      "createDesktopShortcut": true,
-      "createStartMenuShortcut": true,
-      "shortcutName": "LUMEN",
-      "artifactName": "LUMEN-Setup-${version}-${arch}.${ext}"
-    },
-    "portable": {
-      "artifactName": "LUMEN-Portable-${version}-${arch}.${ext}"
-    },
-    "publish": {
-      "provider": "github",
-      "owner": "elorenzog",
-      "repo": "lumen",
-      "releaseType": "release"
-    }
+    "dist:win": "tauri build --bundles nsis",
+    "dev:web": "vite --host 127.0.0.1 --port 5173 --strictPort",
+    "tauri": "tauri",
+    "build:native": "tauri build --no-bundle",
+    "test:native": "cargo test --manifest-path src-tauri/Cargo.toml"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
-      "electron",
       "esbuild",
       "ffmpeg-static"
     ]
   },
   "dependencies": {
-    "electron-updater": "^6.8.11",
-    "fast-xml-parser": "^5.12.1",
-    "fflate": "^0.8.3",
+    "@tauri-apps/api": "^2.11.1",
     "ffmpeg-static": "^5.3.0",
     "ffprobe-static": "^3.1.0",
     "ky": "^2.2.0",
     "lucide": "^1.72.0",
-    "usfm-js": "^3.5.0",
+    "qrcode-generator": "^2.0.4",
     "zod": "^4.6.7"
   },
   "devDependencies": {
+    "@tauri-apps/cli": "^2.11.5",
     "@types/node": "^26.6.6",
-    "electron": "^45.3.2",
-    "electron-builder": "^26.18.0",
     "esbuild": "^0.28.2",
+    "jsqr": "^1.4.0",
     "playwright": "^1.65.1",
     "typescript": "^7.0.2",
     "vite": "^8.3.8",

@@ -1,5 +1,14 @@
 # Cambios de LUMEN
 
+## 0.9.0
+
+- Migración del escritorio a Tauri 2 y Rust, con WebView2 en Windows y la interfaz de Biblia e himnario existente.
+- Backend nativo para SQLite, importaciones, multimedia con FFmpeg/FFprobe, proyección independiente y control remoto local.
+- Instalador NSIS de Windows x64 y actualizaciones Tauri con `latest.json` y firmas verificadas mediante la clave pública de LUMEN.
+- La primera instalación Tauri se realiza manualmente desde GitHub Releases; las publicaciones 0.8.x conservan su canal anterior.
+- El flujo de CI verifica JavaScript y Rust. Si falta la clave de firma, entrega solo un instalador de revisión y bloquea la publicación automática.
+- Se mantienen RV1909/BLL y los catálogos incluidos; Biblias adicionales, videos de himnos y datos personales permanecen locales.
+
 ## 0.8.1
 
 - Corrección de la preparación simultánea del mismo himno en Windows: la caché se publica una sola vez y cada solicitud conserva su propia cancelación.

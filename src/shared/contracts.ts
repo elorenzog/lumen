@@ -31,9 +31,12 @@ export type Saved = z.infer<typeof savedSchema>;
 export const outputSchema = z.object({ slide: slideSchema, blackout: z.boolean(), playing: z.boolean(), position: z.number().nonnegative(), updatedAt: z.number(), connected: z.boolean(), displayId: z.number().nullable(), revision: z.number().int(), preparing:z.object({hymnId:z.string(),title:z.string(),track:z.number().int().nonnegative()}).nullable().default(null) });
 export type Output = z.infer<typeof outputSchema>;
 export const displaySchema = z.object({ id: z.number(), label: z.string(), width: z.number(), height: z.number(), primary: z.boolean() });
-export const snapshotSchema = savedSchema.extend({ updates:updateInfoSchema.default(()=>({...initialUpdateInfo})), remote:remoteInfoSchema.default(()=>({...disabledRemote})), oldHymnCatalog: z.array(oldHymnCatalogEntrySchema).default([]), output: outputSchema, displays: z.array(displaySchema), bibles: z.array(bibleSchema.omit({ verses: true }).extend({ count: z.number() })), backgroundMedia:z.array(backgroundMediaSchema).default([]) });
+export const startupInfoSchema = z.object({ supported: z.boolean(), enabled: z.boolean(), error: z.string().nullable() });
+export const snapshotSchema = savedSchema.extend({ startup:startupInfoSchema.default(()=>({supported:false,enabled:false,error:null})), updates:updateInfoSchema.default(()=>({...initialUpdateInfo})), remote:remoteInfoSchema.default(()=>({...disabledRemote})), oldHymnCatalog: z.array(oldHymnCatalogEntrySchema).default([]), output: outputSchema, displays: z.array(displaySchema), bibles: z.array(bibleSchema.omit({ verses: true }).extend({ count: z.number() })), backgroundMedia:z.array(backgroundMediaSchema).default([]) });
 export type Snapshot = z.infer<typeof snapshotSchema>;
 export const actionSchema = z.discriminatedUnion('type', [
+  z.object({type:z.literal('startup-preference'),enabled:z.boolean()}),
+  z.object({type:z.literal('open-credit'),github:z.enum(['elorenzog','xlCyanz'])}),
   z.object({type:z.literal('updates'),operation:z.enum(['check','download','install','releases'])}),
   z.object({type:z.literal('update-preference'),checkAtStartup:z.boolean()}),
   z.object({type:z.literal('remote-control'),operation:z.enum(['enable','disable','rotate'])}),
