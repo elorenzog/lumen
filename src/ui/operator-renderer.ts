@@ -54,6 +54,8 @@ export function operatorRenderer(root:HTMLElement,state:UIState,syncMedia:()=>vo
       }
     }
     const dialog=document.getElementById('appearance-dialog');
+    const help=document.getElementById('help-dialog');
+    if(help instanceof HTMLDialogElement){help.showModal();help.addEventListener('cancel',event=>{event.preventDefault();state.helpOpen=false;full();root.querySelector<HTMLElement>('[data-action="show-help"]')?.focus({preventScroll:true});});}
     if(dialog instanceof HTMLDialogElement){dialog.showModal();dialog.addEventListener('cancel',event=>{event.preventDefault();state.appearanceDraft=null;full();document.querySelector<HTMLElement>('[data-action="appearance-open"]')?.focus();});}
     fitStages(root,state.snapshot.settings.fontSize);
     const preview=document.getElementById('appearance-preview');if(preview&&state.appearanceDraft)fitStages(preview,state.appearanceDraft.fontSize);
@@ -64,6 +66,7 @@ export function operatorRenderer(root:HTMLElement,state:UIState,syncMedia:()=>vo
     scheduled=requestAnimationFrame(()=>{
       scheduled=0;
       if(contentKey()!==libraryKey){full();return;}
+      if(state.view==='ajustes')return;
       const panel=root.querySelector<HTMLElement>('.inspector');
       if(!panel){full();return;}
       updateRegion(panel,inspector(state));

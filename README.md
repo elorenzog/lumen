@@ -4,6 +4,8 @@
 
 Aplicación de escritorio en español para preparar pasajes, himnos y el programa del culto. La proyección ocupa la pantalla designada sin bordes ni barra de título, mientras el operador conserva su ventana. La Biblia, búsqueda y reproducción funcionan sin Internet.
 
+Al pie del menú encontrarás **¿Cómo funciona?**, con una guía sencilla de proyección, Biblia, himnario, programa y control remoto. Justo debajo está **Ajustes**.
+
 ## Descargar e instalar
 
 Abre [las publicaciones de LUMEN](https://github.com/elorenzog/lumen/releases/latest).
@@ -24,7 +26,7 @@ Se incluyen **Reina-Valera 1909** y **Santa Biblia libre Latinoamericano (BLL)**
 
 Busca referencias o palabras, compara traducciones y selecciona libro → capítulo → versículo. Puedes seleccionar hasta seis versículos y pulsar **Proyectar selección**; doble clic también proyecta. La proyección automática es opcional.
 
-Admite JSON LUMEN/Scrollmapper, XML Zefania, USFM/SFM y ZIP de libros USFM. Para una colección de JSON de LUMEN, usa **Ajustes → Traducciones sin conexión → Importar carpeta de Biblias**. Conserva sus identificadores y omite las ediciones ya instaladas. Copia tu carpeta local a la nueva PC e impórtala allí; no se sube a GitHub. Se conservan avisos y permisos de cada edición. [Fuentes y formatos](docs/FUENTES_Y_TRADUCCIONES.md).
+Admite JSON LUMEN/Scrollmapper, XML Zefania, USFM/SFM y ZIP de libros USFM. Para una colección de JSON de LUMEN, usa **Ajustes → Biblioteca → Traducciones sin conexión → Importar carpeta de Biblias**. Conserva sus identificadores y omite las ediciones ya instaladas. Copia tu carpeta local a la nueva PC e impórtala allí; no se sube a GitHub. Se conservan avisos y permisos de cada edición. [Fuentes y formatos](docs/FUENTES_Y_TRADUCCIONES.md).
 
 ## Himnario y programa
 
@@ -38,9 +40,15 @@ Puedes editar metadatos, marcar favoritos y preparar pasajes e himnos en **Progr
 
 ## Pantalla y apariencia
 
+**Ajustes** organiza la configuración en pestañas: General, Biblioteca, Proyección, Control remoto y Acerca de. En **General** elige **Claro**, **Oscuro** o **Seguir al sistema** y el tamaño **Normal**, **Grande** o **Muy grande**. Las preferencias se recuerdan al abrir LUMEN; el tema del operador no cambia la pantalla de la iglesia. Ctrl + / Ctrl − ajustan la interfaz y Ctrl 0 vuelve a Normal.
+
+La vista diaria conserva la selección rápida y los controles principales. **Ver pantalla de la iglesia** despliega el monitor en vivo; pausar, detener y ocultar siguen disponibles sin abrir esa vista.
+
+La comprobación nativa de pestañas, temas, tamaños, persistencia y proyección independiente se ejecuta con `node scripts/e2e-ui-theme.mjs` después de compilar Tauri. Usa un perfil temporal y guarda sus capturas en `test-results/ui-theme/`.
+
 Conecta el proyector como pantalla extendida y selecciónalo en **Proyección**. En **Apariencia de la pantalla → Personalizar fondo y texto**, prepara colores, degradado, imagen/video silencioso, tipografía, alineación y márgenes. **Aplicar al proyector** confirma el borrador; **Cancelar** conserva el fondo activo.
 
-En **Ajustes → Imagen de la pantalla base**, elige una imagen, ajusta si debe mostrarse completa o llenar la pantalla y pulsa **Aplicar cambios**. Se guarda una copia offline, independiente de los versículos y del video del himno.
+En **Ajustes → Proyección → Imagen de la pantalla base**, elige una imagen, ajusta si debe mostrarse completa o llenar la pantalla y pulsa **Aplicar cambios**. Se guarda una copia offline, independiente de los versículos y del video del himno.
 
 ## Control remoto desde un teléfono
 
@@ -52,10 +60,10 @@ Pulsa **Ajustes → Control remoto → Activar control remoto**. Conecta el tel�
 
 En **Ajustes → Acerca de LUMEN**, busca versiones de GitHub, elige si quieres comprobar al iniciar y descarga una actualización disponible. Instalar requiere una acción explícita y cerrar la proyección. No se reinicia automáticamente durante el culto.
 
-| Desarrollador | Participación |
-| --- | --- |
-| Eliezer Lorenzo | Desarrollo y Diseño |
-| Ezequiel Sierra | Desarrollo |
+| Desarrollador | Participación | GitHub |
+| --- | --- | --- |
+| Eliezer Lorenzo | Desarrollo y Diseño | [@elorenzog](https://github.com/elorenzog) |
+| Ezequiel Sierra | Desarrollo | [@xlCyanz](https://github.com/xlCyanz) |
 
 El flujo de publicaciones está inspirado en [Cantoral](https://github.com/xlCyanz/cantoral), adaptado a Tauri y NSIS con una clave propia de LUMEN. La firma del actualizador es independiente de un certificado Authenticode de Windows. [Cómo publicar una versión](docs/ACTUALIZACIONES_Y_PUBLICACION.md).
 

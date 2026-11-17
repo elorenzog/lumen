@@ -2,6 +2,37 @@ use super::playback::Playback;
 use crate::models::{Action, Slide};
 
 #[test]
+fn developer_profiles_are_known_https_urls() {
+    assert_eq!(
+        crate::platform::credit_url("elorenzog").unwrap(),
+        "https://github.com/elorenzog"
+    );
+    assert_eq!(
+        crate::platform::credit_url("xlCyanz").unwrap(),
+        "https://github.com/xlCyanz"
+    );
+    assert!(crate::platform::credit_url("https://example.com").is_err());
+}
+
+#[test]
+fn only_operator_can_open_known_developer_profiles() {
+    let action = Action::OpenCredit {
+        github: "elorenzog".into(),
+    };
+    assert!(action.validate().is_ok());
+    assert!(action.authorize("main").is_ok());
+    assert!(action.authorize("projection").is_err());
+    assert!(action.authorize("remote").is_err());
+    assert!(
+        Action::OpenCredit {
+            github: "other".into()
+        }
+        .validate()
+        .is_err()
+    );
+}
+
+#[test]
 fn projection_rejects_content_mutation_when_source_is_output() {
     // Given a command that can alter the operator's library.
     let action = Action::Project {

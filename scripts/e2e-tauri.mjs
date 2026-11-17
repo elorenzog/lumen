@@ -151,6 +151,7 @@ try{
   await output.waitForFunction(()=>/3:16[–-]18/.test(document.querySelector('.stage-reference')?.textContent??''));
   await capture(output,'projection-range');
   await page.locator('.add-program').click();
+  await page.waitForFunction(async()=>{const result=await window.lumen.invoke({type:'snapshot'});return result.ok&&result.data.program.length===1;});
   assert.equal((await snapshot(page)).program.length,1);
   if(!await page.locator('#appearance-options').evaluate(element=>element.open))await page.locator('#appearance-options > summary').click();
   await page.locator('[data-action="appearance-open"]').click();
@@ -195,10 +196,10 @@ try{
       assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,`${view} fits ${width}px`);
       await capture(page,`${view}-${label}`);
     }
-    await page.locator('[data-action="show-about"]').click();
+    await page.locator('#settings-tab-acerca').click();
     await page.waitForFunction(()=>{
       const about=document.getElementById('about-lumen');
-      const heading=document.getElementById('about-heading');
+      const heading=about?.querySelector('.about-card');
       const reader=about?.closest('.reader');
       const credits=about?.querySelector('.developer-row:last-child');
       if(!heading||!reader||!credits)return false;

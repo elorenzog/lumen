@@ -13,6 +13,8 @@ import { baseScreenActions } from './base-screen-actions';
 import { baseImageErrors } from './ui/base-screen';
 import { selectRange } from './shared/selection';
 import { selectedOldCatalog } from './shared/old-hymn-catalog';
+import { parseSettingsTab, settingsTabKeys } from './ui/settings';
+import { developers } from './shared/app-info';
 
 export async function operator(root:HTMLElement):Promise<void>{
   const bridge=window.lumen;
@@ -31,6 +33,7 @@ export async function operator(root:HTMLElement):Promise<void>{
   const guarded=(promise:Promise<unknown>):void=>{void promise.catch(showError);};
   const renderer=operatorRenderer(root,state,()=>syncPreview());
   const render=():void=>renderer.full();
+  root.addEventListener('keydown',settingsTabKeys);
   const syncPreview=():void=>{
     const video=root.querySelector<HTMLVideoElement>('[data-live-preview] .stage-video');if(!video)return;
     video.muted=true;
@@ -79,6 +82,7 @@ export async function operator(root:HTMLElement):Promise<void>{
   const base=baseScreenActions(state,{invoke,render});
   let lastVerseClick:{key:string;at:number}|undefined;
   const handle=async(action:string,id:string|undefined,button:HTMLElement,event:MouseEvent):Promise<void>=>{
+    if(action==='settings-tab'){state.settingsTab=parseSettingsTab(id);render();root.querySelector<HTMLElement>(`#settings-tab-${state.settingsTab}`)?.focus({preventScroll:true});return;}
     if(action==='remote-enable'||action==='remote-disable'||action==='remote-rotate'){
       state.busy=true;render();
       try{await invoke({type:'remote-control',operation:action==='remote-enable'?'enable':action==='remote-disable'?'disable':'rotate'});state.message=action==='remote-disable'?'Control remoto desactivado.':'Control remoto listo. Consulta la dirección y el PIN en Ajustes.';}
@@ -87,7 +91,10 @@ export async function operator(root:HTMLElement):Promise<void>{
     if(await base.action(action)||await appearance.action(action)||await features.action(action,id))return;
     if(action.startsWith('view-')){const view=action.slice(5);if(['biblia','himnario','programa','ajustes'].includes(view)){state.view=view==='himnario'?'himnario':view==='programa'?'programa':view==='ajustes'?'ajustes':'biblia';state.query='';render();}return;}
     switch(action){
-      case 'show-about':document.getElementById('about-lumen')?.scrollIntoView({block:'start',behavior:'instant'});break;
+      case 'show-help':state.helpOpen=true;render();break;
+      case 'close-help':state.helpOpen=false;render();root.querySelector<HTMLElement>('[data-action="show-help"]')?.focus({preventScroll:true});break;
+      case 'open-credit':{const person=developers.find(person=>person.github===id);if(person)await invoke({type:'open-credit',github:person.github});break;}
+      case 'show-about':state.view='ajustes';state.settingsTab='acerca';render();document.getElementById('about-lumen')?.scrollIntoView({block:'start',behavior:'instant'});break;
       case 'update-check':case 'update-download':case 'update-install':case 'update-releases':await invoke({type:'updates',operation:action==='update-check'?'check':action==='update-download'?'download':action==='update-install'?'install':'releases'});break;
       case 'import-bible-folder':state.busy=true;render();try{await invoke({type:'import-bible-folder'});state.message='Carpeta de Biblias procesada.';}finally{state.busy=false;render();}break;
       case 'book':state.book=Number(id);state.chapter=1;state.query='';render();root.querySelector('.verses')?.scrollTo(0,0);break;
@@ -167,7 +174,7 @@ export async function operator(root:HTMLElement):Promise<void>{
   },true);
   root.addEventListener('input',event=>{const target=event.target;if(target instanceof HTMLElement)features.input(target);if(target instanceof HTMLInputElement||target instanceof HTMLSelectElement){if(appearance.input(target))return;}if(!(target instanceof HTMLInputElement))return;if(target.id==='verse-range'){state.rangeInput=target.value;return;}if(target.id==='book-search'){state.bookQuery=target.value;render();}if(target.id==='global-search'){state.query=target.value;state.searchResults=null;clearTimeout(searchTimer);searchTimer=setTimeout(()=>guarded(search()),180);}});
   document.addEventListener('keydown',event=>{
-    if(state.appearanceDraft)return;
+    if(state.appearanceDraft||state.helpOpen)return;
     if(event.ctrlKey&&event.key.toLowerCase()==='l'){event.preventDefault();const input=document.getElementById('global-search');if(input instanceof HTMLInputElement){input.focus();input.select();}return;}
     if(event.key==='Enter'&&event.target instanceof HTMLElement&&event.target.id==='verse-range'){event.preventDefault();guarded(handle('select-range',undefined,event.target,new MouseEvent('click')));return;}
     const editing=event.target instanceof HTMLInputElement||event.target instanceof HTMLSelectElement||event.target instanceof HTMLTextAreaElement;

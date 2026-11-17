@@ -1,0 +1,96 @@
+/* Keep native form and keyboard behavior; only the operator opts into themed menus. */
+:root[data-ui-theme] select:not([multiple]) {
+  cursor: pointer;
+  min-width: 0;
+}
+
+:root[data-ui-theme] select:not([multiple]):hover:not(:disabled) {
+  border-color: var(--accent);
+}
+
+:root[data-ui-theme] select:disabled {
+  color: var(--muted);
+  background-color: var(--inset);
+  cursor: not-allowed;
+}
+
+@supports (appearance: base-select) {
+  :root[data-ui-theme] select:not([multiple]),
+  :root[data-ui-theme] select:not([multiple])::picker(select) {
+    appearance: base-select;
+  }
+
+  :root[data-ui-theme] select:not([multiple]) {
+    align-items: center;
+    gap: 8px;
+    min-height: 36px;
+    padding: 8px 12px;
+    border: 1px solid var(--line);
+    border-radius: var(--r-sm);
+    background: var(--panel);
+    color: var(--ink);
+  }
+
+  :root[data-ui-theme] select:not([multiple]):open {
+    border-color: var(--accent);
+  }
+
+  :root[data-ui-theme] select:not([multiple])::picker-icon {
+    color: var(--muted);
+    flex-shrink: 0;
+    margin-inline-start: auto;
+  }
+
+  :root[data-ui-theme] select:not([multiple])::picker(select) {
+    font: inherit;
+    color: var(--ink);
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: var(--r-md);
+    padding: 4px;
+    margin-block: 4px;
+    max-inline-size: calc(100vw - 24px);
+    max-block-size: min(320px, 50dvh);
+    overflow: auto;
+    box-shadow: 0 2px 8px var(--shadow);
+  }
+
+  :root[data-ui-theme] select:not([multiple]) option {
+    min-height: 36px;
+    padding: 8px 12px;
+    gap: 8px;
+    border-radius: var(--r-sm);
+    color: var(--ink);
+    background: var(--panel);
+    white-space: normal;
+    overflow-wrap: anywhere;
+    line-height: 1.5;
+    cursor: pointer;
+  }
+
+  :root[data-ui-theme] select:not([multiple]) option:checked {
+    color: var(--accent);
+    background: var(--accent-soft);
+    font-weight: 600;
+  }
+
+  :root[data-ui-theme] select:not([multiple]) option:hover:not(:disabled) {
+    background: var(--inset);
+  }
+
+  :root[data-ui-theme] select:not([multiple]) option:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: -2px;
+  }
+
+  :root[data-ui-theme] select:not([multiple]) option::checkmark {
+    color: var(--accent);
+  }
+
+  :root[data-ui-theme] select:not([multiple]) option:disabled,
+  :root[data-ui-theme] select:disabled {
+    color: var(--muted);
+    background: var(--inset);
+    cursor: not-allowed;
+  }
+}

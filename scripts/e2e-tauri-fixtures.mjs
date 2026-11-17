@@ -82,6 +82,7 @@ export async function exerciseNativeFixtures({page,output,data,evidence}){
   await writeFile(path.join(folder,'invalid.json'),'{}');
   await dialogs(data,{'import-bible-folder':[folder]});
   await page.locator('[data-action="view-ajustes"]').click();
+    await page.locator('#settings-tab-biblioteca').click();
   await page.locator('[data-action="import-bible-folder"]').click();
   await waitForNative(page,{kind:'bible',id:'native-folder-test'});
   assert.equal((await snapshot(page)).bibles.filter(bible=>bible.id===fileBibleId).length,1,'Folder import skips installed Bible IDs');

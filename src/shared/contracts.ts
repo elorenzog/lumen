@@ -34,6 +34,7 @@ export const displaySchema = z.object({ id: z.number(), label: z.string(), width
 export const snapshotSchema = savedSchema.extend({ updates:updateInfoSchema.default(()=>({...initialUpdateInfo})), remote:remoteInfoSchema.default(()=>({...disabledRemote})), oldHymnCatalog: z.array(oldHymnCatalogEntrySchema).default([]), output: outputSchema, displays: z.array(displaySchema), bibles: z.array(bibleSchema.omit({ verses: true }).extend({ count: z.number() })), backgroundMedia:z.array(backgroundMediaSchema).default([]) });
 export type Snapshot = z.infer<typeof snapshotSchema>;
 export const actionSchema = z.discriminatedUnion('type', [
+  z.object({type:z.literal('open-credit'),github:z.enum(['elorenzog','xlCyanz'])}),
   z.object({type:z.literal('updates'),operation:z.enum(['check','download','install','releases'])}),
   z.object({type:z.literal('update-preference'),checkAtStartup:z.boolean()}),
   z.object({type:z.literal('remote-control'),operation:z.enum(['enable','disable','rotate'])}),

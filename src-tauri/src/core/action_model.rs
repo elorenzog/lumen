@@ -27,6 +27,9 @@ pub enum RemoteOperation {
     rename_all_fields = "camelCase"
 )]
 pub enum Action {
+    OpenCredit {
+        github: String,
+    },
     Updates {
         operation: UpdateOperation,
     },
@@ -105,6 +108,12 @@ fn unknown_edition() -> String {
 }
 impl Action {
     pub fn authorize(&self, source: &str) -> Result<()> {
+        if matches!(self, Self::OpenCredit { .. }) && source != "main" {
+            return Err(Error::new(
+                "permission",
+                "Solo el operador puede abrir perfiles.",
+            ));
+        }
         match source {
             "main" | "remote" => Ok(()),
             "projection" => match self {
@@ -113,7 +122,8 @@ impl Action {
                 | Self::MediaError { .. }
                 | Self::BackgroundError { .. }
                 | Self::CloseOutput => Ok(()),
-                Self::Updates { .. }
+                Self::OpenCredit { .. }
+                | Self::Updates { .. }
                 | Self::UpdatePreference { .. }
                 | Self::RemoteControl { .. }
                 | Self::Bible { .. }
@@ -142,6 +152,7 @@ impl Action {
     }
     pub fn validate(&self) -> Result<()> {
         let valid = match self {
+            Self::OpenCredit { github } => matches!(github.as_str(), "elorenzog" | "xlCyanz"),
             Self::BibleSearch { query, .. } => query.encode_utf16().count() <= 500,
             Self::DownloadBible { id } => matches!(id.as_str(), "spa_bll" | "spa_blm"),
             Self::ImportBackground { kind } => matches!(kind.as_str(), "image" | "video"),

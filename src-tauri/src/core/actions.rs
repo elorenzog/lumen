@@ -11,6 +11,10 @@ use std::sync::Arc;
 impl Core {
     pub(super) async fn dispatch(self: &Arc<Self>, action: Action) -> Result<Value> {
         match action {
+            Action::OpenCredit { github } => {
+                platform::open_credit(&self.app, &github)?;
+                Ok(Value::Null)
+            }
             Action::Snapshot => to_value(self.snapshot()?).map_err(Into::into),
             Action::Bible { id } => {
                 let bible = self
