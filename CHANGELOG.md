@@ -1,5 +1,11 @@
 # Cambios de LUMEN
 
+## 0.9.2
+
+- Pantalla base personalizable y ajuste de la posición del indicador animado de carga de himnos.
+- Fundido rápido al abrir o restaurar la proyección. Al quitar contenido o cerrar la salida, el fundido deja ver el escritorio de Windows.
+- La pantalla negra se aplica de inmediato. Los fundidos respetan la preferencia de movimiento reducido de Windows.
+
 ## 0.9.1
 
 - Configuración por pestañas, temas claro/oscuro/sistema y tamaños de interfaz persistentes.

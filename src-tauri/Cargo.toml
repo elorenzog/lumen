@@ -1,6 +1,6 @@
 [package]
 name = "lumen"
-version = "0.9.1"
+version = "0.9.2"
 description = "Biblia e Himnario Adventista con proyección independiente"
 authors = ["Eliezer Lorenzo", "Ezequiel Sierra"]
 edition = "2024"
