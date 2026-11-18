@@ -45,6 +45,19 @@ describe('Given projection controls for different preparation sections', () => {
     expect(html).toContain('id="auto-project"');
     expect(html).not.toContain('id="hymn-volume"');
   });
+  it('allows removing visible Scripture without closing the output', () => {
+    const state = fixture('biblia', { connected: true, slide: { kind: 'verse', text: 'Texto', reference: 'Juan 3:16', translation: 'PR' } });
+    const html = inspector(state);
+    expect(html).toContain('Quitar contenido');
+    expect(html).toContain('Cerrar proyección');
+  });
+  it('shows a connected, transparent idle output without rendering the base screen as live', () => {
+    const html = inspector(fixture('biblia', { connected: true, cleared: true }));
+    expect(html).toContain('Escritorio visible');
+    expect(html).toContain('data-playback-state="cleared"');
+    expect(html).not.toContain('Quitar contenido');
+    expect(html).not.toMatch(/data-live-preview>\s*<div class="stage /);
+  });
   it('keeps transport for the actual live hymn when navigating to the Bible', () => {
     const state = fixture('biblia', { connected: true, playing: false, slide: { kind: 'hymn', hymnId: hymn.id, title: 'Himno en la salida', track: 1, mediaUrl: 'http://localhost/song.mp4' } });
     const html = inspector(state);

@@ -121,6 +121,11 @@ pub fn settings(value: &Settings) -> Result<()> {
         || !valid_enum(&value.base_screen.fit, &["contain", "cover"])
         || value
             .base_screen
+            .loading_position
+            .as_ref()
+            .is_some_and(|position| position.x > 100 || position.y > 100)
+        || value
+            .base_screen
             .image_id
             .as_ref()
             .is_some_and(|id| uuid::Uuid::parse_str(id).is_err())
@@ -188,4 +193,30 @@ pub fn saved(value: &Saved) -> Result<()> {
         }
     }
     Ok(())
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn base_screen_loading_position_is_optional_and_validated() -> serde_json::Result<()> {
+        let legacy = serde_json::to_value(Settings::default())?;
+        let old: Settings = serde_json::from_value(legacy.clone())?;
+        assert!(old.base_screen.loading_position.is_none());
+        assert!(settings(&old).is_ok());
+
+        let mut configured = legacy;
+        configured["baseScreen"]["loadingPosition"] = serde_json::json!({"x": 38, "y": 87});
+        let valid: Settings = serde_json::from_value(configured.clone())?;
+        assert!(settings(&valid).is_ok());
+        assert_eq!(
+            serde_json::to_value(valid)?["baseScreen"],
+            configured["baseScreen"]
+        );
+
+        configured["baseScreen"]["loadingPosition"]["x"] = serde_json::json!(101);
+        assert!(settings(&serde_json::from_value(configured)?).is_err());
+        Ok(())
+    }
 }

@@ -34,7 +34,7 @@ Importa archivos o una carpeta de MKV con nombres como `001 Cantad alegres al Se
 
 **Antiguo (1962)** y **Nuevo (2009)** usan su propia numeración. El antiguo conserva los 527 títulos: si no existe video vinculado indica **Canción no disponible**. Las correspondencias y conflictos se muestran en la ficha. No se descargan letras, canciones ni pistas con el catálogo.
 
-Selecciona la pista cantada o instrumental del archivo. **Pausar** conserva su posición; **Detener** descarga el video y vuelve a la pantalla base. Cambiar de himno cancela preparaciones anteriores. Los videos H.264 compatibles se preparan sin recodificar la imagen y se reutiliza la caché local.
+Selecciona la pista cantada o instrumental del archivo. **Pausar** conserva su posición; **Detener** descarga el video y deja ver el escritorio de Windows sin desconectar la salida. Cambiar de himno cancela preparaciones anteriores. Los videos H.264 compatibles se preparan sin recodificar la imagen y se reutiliza la caché local.
 
 Puedes editar metadatos, marcar favoritos y preparar pasajes e himnos en **Programa**. La preparación es independiente de lo que está en vivo.
 
@@ -49,6 +49,10 @@ La comprobación nativa de pestañas, temas, tamaños, persistencia y proyecció
 Conecta el proyector como pantalla extendida y selecciónalo en **Proyección**. En **Apariencia de la pantalla → Personalizar fondo y texto**, prepara colores, degradado, imagen/video silencioso, tipografía, alineación y márgenes. **Aplicar al proyector** confirma el borrador; **Cancelar** conserva el fondo activo.
 
 En **Ajustes → Proyección → Imagen de la pantalla base**, elige una imagen, ajusta si debe mostrarse completa o llenar la pantalla y pulsa **Aplicar cambios**. Se guarda una copia offline, independiente de los versículos y del video del himno.
+
+Haz clic en la vista previa o usa los controles de posición para ubicar **Cargando contenido…** y pulsa **Aplicar cambios**. El indicador solo aparece en la proyección mientras se prepara un himno. Usa una imagen sin el texto de carga, como [la pantalla base de LUMEN](docs/assets/lumen-base-screen.png).
+
+Al abrir la salida o volver a proyectar después de quitar contenido, la imagen aparece con un fundido rápido. **Quitar contenido** y **Cerrar proyección** dejan ver el escritorio del monitor asignado: comprueba qué hay detrás antes de usarlos. **Pantalla negra** sigue siendo instantánea. Podés volver a mostrar la ilustración con **Pantalla de inicio**.
 
 ## Control remoto desde un teléfono
 

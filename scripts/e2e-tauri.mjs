@@ -131,6 +131,14 @@ try{
   await observe(output);
   assert.match(await output.locator('.stage-reference').innerText(),/Juan 3:16/);
   await capture(output,'projection-verse');
+  await page.getByRole('button',{name:'Quitar contenido',exact:true}).click();
+  await output.locator('.stage').waitFor({state:'detached'});
+  const idle=await snapshot(page);
+  assert.equal(idle.output.connected,true,'Clearing a verse keeps the monitor connected');
+  assert.equal(idle.output.cleared,true,'Clearing reveals the desktop instead of showing the base screen');
+  await page.locator('.project-button').click();
+  await output.locator('.stage-text').waitFor();
+  assert.equal((await snapshot(page)).output.cleared,false,'Projecting again restores the content');
   const restricted=await output.evaluate(()=>window.lumen.invoke({type:'program',program:[]}));
   assert.equal(restricted.ok,false,'Native backend rejects operator actions from projection');
   await page.locator('[data-action="blackout"]').click();
@@ -168,6 +176,19 @@ try{
   await capture(output,'projection-welcome');
   await output.keyboard.press('Escape');
   await waitForNative(page,{kind:'connected',value:false});
+  await output.waitForEvent('close',{timeout:5000}).catch(error=>{if(!output.isClosed())throw error;});
+  const displayId=initial.displays[0].id;
+  await invoke(page,{type:'open-output',displayId});
+  const beforeReopen=await findPage(true);
+  await beforeReopen.locator('.stage-welcome').waitFor();
+  const closing=invoke(page,{type:'close-output'});
+  await waitForNative(page,{kind:'connected',value:false});
+  await Promise.all([closing,invoke(page,{type:'open-output',displayId})]);
+  const reopened=await findPage(true);
+  assert.notEqual(reopened,beforeReopen,'Reopening waits for the previously fading window to close');
+  await reopened.locator('.stage-welcome').waitFor();
+  assert.equal((await snapshot(page)).output.connected,true);
+  await invoke(page,{type:'close-output'});
   await invoke(page,{type:'update-preference',checkAtStartup:false});
   const subscription=await page.evaluate(async()=>{
     let events=0;

@@ -81,7 +81,9 @@ pub async fn open_output(app: &AppHandle, id: i64) -> Result<()> {
         .data_directory(profile.join("webview2"));
         #[cfg(windows)]
         {
-            builder = builder.additional_browser_args(&browser_arguments());
+            builder = builder
+                .additional_browser_args(&browser_arguments())
+                .transparent(true);
         }
         builder.build()?
     };
@@ -97,7 +99,7 @@ pub async fn open_output(app: &AppHandle, id: i64) -> Result<()> {
 
 pub fn close_output(app: &AppHandle) -> Result<()> {
     if let Some(window) = app.get_webview_window("projection") {
-        window.close()?;
+        window.destroy()?;
     }
     Ok(())
 }

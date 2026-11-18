@@ -111,12 +111,7 @@ impl Core {
                 Ok(Value::Null)
             }
             Action::CloseOutput => {
-                self.stop();
-                platform::close_output(&self.app)?;
-                self.changed_output(|output| {
-                    output.connected = false;
-                    output.display_id = None;
-                });
+                self.close().await?;
                 Ok(Value::Null)
             }
             Action::Project { slide } => {

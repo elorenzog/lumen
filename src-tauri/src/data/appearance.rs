@@ -63,6 +63,8 @@ pub struct ThemePreset {
 pub struct BaseScreen {
     pub image_id: Option<String>,
     pub fit: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub loading_position: Option<LoadingPosition>,
     #[serde(flatten)]
     pub extra: BTreeMap<String, Value>,
 }
@@ -71,9 +73,15 @@ impl Default for BaseScreen {
         Self {
             image_id: None,
             fit: "contain".into(),
+            loading_position: None,
             extra: BTreeMap::new(),
         }
     }
+}
+#[derive(Clone, Debug, Serialize, Deserialize)]
+pub struct LoadingPosition {
+    pub x: u8,
+    pub y: u8,
 }
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]

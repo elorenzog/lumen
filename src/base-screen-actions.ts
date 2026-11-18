@@ -1,4 +1,4 @@
-import { baseScreenSchema,defaultBaseScreen } from './shared/base-screen';
+import { baseScreenSchema,defaultBaseScreen,defaultLoadingPosition,type LoadingPosition } from './shared/base-screen';
 import type { Action } from './shared/contracts';
 import { LumenError } from './shared/contracts';
 import type { UIState } from './ui/state';
@@ -6,16 +6,33 @@ import type { UIState } from './ui/state';
 type Context={readonly invoke:(action:Action)=>Promise<unknown>;readonly render:()=>void};
 export function baseScreenActions(state:UIState,context:Context){
   const {invoke,render}=context;
+  const current=()=>state.baseScreenDraft??state.snapshot.settings.baseScreen;
+  const placeLoading=(position:LoadingPosition):void=>{
+    state.baseScreenDraft=baseScreenSchema.parse({...current(),loadingPosition:position});
+    render();
+  };
   const save=async():Promise<void>=>{
     const config=state.baseScreenDraft;if(!config)return;
     await invoke({type:'settings',settings:{...state.snapshot.settings,baseScreen:config}});
     state.baseScreenDraft=null;state.message='Pantalla base guardada.';render();
   };
   return {
+    place(event:MouseEvent,preview:HTMLElement):void{
+      if(state.baseScreenBusy)return;
+      const bounds=preview.getBoundingClientRect();
+      if(bounds.width<=0||bounds.height<=0)return;
+      const percent=(distance:number,size:number)=>Math.round(Math.max(0,Math.min(100,distance/size*100)));
+      placeLoading({x:percent(event.clientX-bounds.left,bounds.width),y:percent(event.clientY-bounds.top,bounds.height)});
+    },
     change(target:HTMLInputElement|HTMLSelectElement):boolean{
-      const current=state.baseScreenDraft??state.snapshot.settings.baseScreen;
-      if(target.id==='base-screen-image')state.baseScreenDraft=baseScreenSchema.parse({...current,imageId:target.value||null});
-      else if(target.id==='base-screen-fit')state.baseScreenDraft=baseScreenSchema.parse({...current,fit:target.value});
+      const config=current();
+      if(target.id==='base-screen-loading-x'||target.id==='base-screen-loading-y'){
+        const axis=target.id==='base-screen-loading-x'?'x':'y';
+        placeLoading({...(config.loadingPosition??defaultLoadingPosition),[axis]:Number(target.value)});
+        return true;
+      }
+      if(target.id==='base-screen-image')state.baseScreenDraft=baseScreenSchema.parse({...config,imageId:target.value||null});
+      else if(target.id==='base-screen-fit')state.baseScreenDraft=baseScreenSchema.parse({...config,fit:target.value});
       else return false;
       render();return true;
     },

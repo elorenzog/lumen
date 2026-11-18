@@ -76,6 +76,8 @@ pub struct Preparation {
 pub struct Output {
     pub slide: Slide,
     pub blackout: bool,
+    #[serde(default)]
+    pub cleared: bool,
     pub playing: bool,
     pub position: f64,
     pub updated_at: f64,
@@ -89,6 +91,7 @@ impl Default for Output {
         Self {
             slide: Slide::welcome(),
             blackout: false,
+            cleared: false,
             playing: false,
             position: 0.0,
             updated_at: crate::core::now(),

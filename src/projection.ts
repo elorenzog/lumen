@@ -11,13 +11,38 @@ export async function projection(root:HTMLElement):Promise<void>{
   document.body.classList.add('projection-body');
   baseImageErrors(root,message=>{void bridge.invoke({type:'background-error',message});});
   let revision=-1;let appearanceKey="";let snapshot:Snapshot|undefined;
+  const reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)');
+  let fade:Animation|undefined;
+  let visible=false;
+  const removeStage=(instant:boolean):void=>{
+    const stage=root.firstElementChild;
+    if(!stage)return;
+    if(instant){fade?.cancel();fade=undefined;replaceMarkup(root,'');return;}
+    stage.querySelectorAll('video').forEach(video=>video.pause());
+    const opacity=Number(getComputedStyle(stage).opacity);
+    fade?.cancel();
+    const outgoing=stage.animate([{opacity},{opacity:0}],{duration:160,easing:'ease-in',fill:'forwards'});
+    fade=outgoing;
+    outgoing.onfinish=()=>{if(fade===outgoing){replaceMarkup(root,'');fade=undefined;}};
+  };
+  reduceMotion.addEventListener('change',()=>{if(!reduceMotion.matches)return;if(visible){fade?.cancel();fade=undefined;}else removeStage(true);});
   root.addEventListener('error',event=>{if(event.target instanceof Element&&event.target.classList.contains('stage-background'))void bridge.invoke({type:'background-error',message:'No se pudo leer el fondo de proyección. Selecciona otro archivo en Apariencia.'});},true);
   const render=(next:Snapshot):void=>{
     snapshot=next;
-    const key=JSON.stringify([next.settings.appearance,next.settings.fontSize,next.settings.theme,next.backgroundMedia,next.output.slide.kind==='welcome'?next.settings.baseScreen:null]);
-    if(revision!==next.output.revision||(next.output.slide.kind!=="hymn"&&key!==appearanceKey)){
+    const wasVisible=visible;
+    visible=next.output.connected&&!next.output.cleared;
+    root.classList.toggle('blackout',next.output.blackout);
+    if(!visible){
+      if(wasVisible||next.output.blackout)removeStage(next.output.blackout||reduceMotion.matches);
+      return;
+    }
+    const showLoading=next.output.slide.kind==='welcome'&&Boolean(next.output.preparing);
+    const key=JSON.stringify([next.settings.appearance,next.settings.fontSize,next.settings.theme,next.backgroundMedia,next.output.slide.kind==='welcome'?next.settings.baseScreen:null,showLoading]);
+    if(!wasVisible||revision!==next.output.revision||(next.output.slide.kind!=="hymn"&&key!==appearanceKey)){
+      fade?.cancel();
+      fade=undefined;
       appearanceKey=key;
-      revision=next.output.revision;replaceMarkup(root,stageMarkup(next.output.slide,next,true));
+      revision=next.output.revision;replaceMarkup(root,stageMarkup(next.output.slide,next,true,showLoading));
       const video=root.querySelector<HTMLVideoElement>('.stage-video');
       if(video){
         const thisRevision=revision;
@@ -26,8 +51,10 @@ export async function projection(root:HTMLElement):Promise<void>{
         video.addEventListener('loadedmetadata',()=>sync());
       }
       fitStages(root,next.settings.fontSize);
+      if(!wasVisible&&!next.output.blackout&&!reduceMotion.matches){
+        fade=root.firstElementChild?.animate([{opacity:0},{opacity:1}],{duration:140,easing:'ease-out'});
+      }
     }
-    root.classList.toggle('blackout',next.output.blackout);
     sync();
   };
   const sync=():void=>{

@@ -69,6 +69,21 @@ pub fn run() {
             Ok(())
         })
         .on_window_event(|window, event| {
+            if let WindowEvent::CloseRequested { api, .. } = event {
+                if let Some(core) = window
+                    .app_handle()
+                    .try_state::<Arc<Core>>()
+                    .filter(|_| window.label() == "projection")
+                {
+                    api.prevent_close();
+                    let core = Arc::clone(core.inner());
+                    tauri::async_runtime::spawn(async move {
+                        if let Err(error) = core.close().await {
+                            core.status(&error.message);
+                        }
+                    });
+                }
+            }
             if let WindowEvent::Destroyed = event {
                 if let Some(core) = window.app_handle().try_state::<Arc<Core>>() {
                     match window.label() {

@@ -10,6 +10,18 @@ describe('Given a personalized base screen image',()=>{
   it('keeps old settings compatible with the original LUMEN welcome',()=>{
     const settings=settingsSchema.parse({theme:'noche',fontSize:52,autoProject:false,volume:.8});expect(settings).toHaveProperty('baseScreen',{imageId:null,fit:'contain'});
   });
+  it('shows loading at the saved position only on the welcome slide while preparing',()=>{
+    const settings=settingsSchema.parse({...defaults.settings,baseScreen:{imageId:id,fit:'contain',loadingPosition:{x:38,y:87}}});
+    const style={settings,backgroundMedia:media};
+    expect(stageMarkup(welcome,style,true,true)).toContain('role="status"');
+    expect(stageMarkup(welcome,style,true,true)).toContain('Cargando contenido…');
+    expect(stageMarkup(welcome,style,true,true)).toContain('--loading-x:38%;--loading-y:87%');
+    expect(stageMarkup(welcome,style,true,false)).not.toContain('Cargando contenido');
+    expect(stageMarkup({kind:'verse',text:'Texto',reference:'Juan 3:16',translation:'PR'},style,true,true)).not.toContain('Cargando contenido');
+  });
+  it('rejects a loading position outside the projection',()=>{
+    expect(settingsSchema.safeParse({...defaults.settings,baseScreen:{loadingPosition:{x:101,y:50}}}).success).toBe(false);
+  });
   it('renders the managed image only on the welcome slide',()=>{
     const settings=settingsSchema.parse({...defaults.settings,baseScreen:{imageId:id,fit:'contain'}});
     expect(stageMarkup(welcome,{settings,backgroundMedia:media})).toContain('class="stage-base-image"');

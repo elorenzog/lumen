@@ -146,7 +146,7 @@ export async function exerciseNativeFixtures({page,output,data,evidence}){
   await capture(page,'native-hymn-operator');
   await page.locator('[data-action="stop"]').click();
   await output.locator('.stage-video').waitFor({state:'detached'});
-  assert.equal((await snapshot(page)).output.slide.kind,'welcome','Stop restores the base screen');
+  assert.equal((await snapshot(page)).output.cleared,true,'Stop reveals the desktop while keeping the output connected');
   await dialogs(data,{'import-hymns':[replacement]});
   await page.locator('[data-action="import-hymns"]').click();
   const waiting=await waitForNative(page,{kind:'hymn-count',count:2});

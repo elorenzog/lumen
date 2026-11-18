@@ -59,6 +59,10 @@ Appearance editor: a labelled native modal dialog, two columns on desktop and on
 120ms ease-out opacity/transform only. Button active shifts 1px. No decorative continuous animation. Reduced-motion removes transitions. Manual project by default; an explicit automatic projection toggle sends selection immediately. Arrows navigate verses outside editable controls, B toggles blackout, Escape closes projection. Blackout pauses hymn audio; restoring resumes only if previously playing.
 
 ## 7. Depth & surface
+
+Hymn preparation overlays an ivory loading status and amber 900 ms progress ring on the base screen. The indicator is hidden when idle or blacked out; reduced motion keeps the ring static. Its position is saved as relative percentages and inset to keep the label within projection margins; settings preview supports pointer placement and keyboard-operable range controls.
+
+Windows audience output uses a transparent native surface. Opening or restoring content fades in for 140 ms; clearing or closing fades out for 160 ms to reveal the selected monitor's desktop. Clearing keeps the output connected; the explicit welcome action restores the base artwork. Reduced motion skips opacity animation, and blackout keeps its immediate, opaque black cover.
 Mixed: hairline borders define utility regions; subtle 0 2px 8px #00000008 elevation for floating notices. Reading canvas stays flat. Audience background has layered radial light: projection-light at top-left and projection-glow bottom-right on projection base. Projected text uses ample safe margins and an amber fine rule.
 
 ## 8. Accessibility constraints & accepted debt

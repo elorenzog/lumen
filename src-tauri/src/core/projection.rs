@@ -3,7 +3,8 @@ use crate::{
     error::{Error, Result},
     models::{Hymn, Output, Preparation, Slide},
 };
-use std::sync::Arc;
+use std::{sync::Arc, time::Duration};
+use tauri::Manager;
 
 impl Core {
     pub fn output(&self) -> Output {
@@ -13,22 +14,48 @@ impl Core {
         let _opening = self.opening.lock().await;
         crate::platform::open_output(&self.app, display_id).await?;
         self.changed_output(|output| {
+            if !output.connected {
+                output.cleared = false;
+            }
             output.connected = true;
             output.display_id = Some(display_id);
         });
         Ok(())
     }
+    pub(crate) async fn close(&self) -> Result<()> {
+        let _opening = self.opening.lock().await;
+        let output = self.output();
+        if self.app.get_webview_window("projection").is_none() {
+            return Ok(());
+        }
+        if output.connected {
+            self.clear_output(None, true);
+            if !output.blackout {
+                // Give the renderer a bounded window for the 160 ms fade.
+                tokio::time::sleep(Duration::from_millis(240)).await;
+            }
+        }
+        crate::platform::close_output(&self.app)?;
+        let closed = tokio::time::timeout(Duration::from_secs(1), async {
+            while self.app.get_webview_window("projection").is_some() {
+                tokio::time::sleep(Duration::from_millis(10)).await;
+            }
+        })
+        .await;
+        closed.map_err(|_| Error::new("display", "No se pudo cerrar la proyección."))
+    }
     pub fn output_closed(&self) {
-        self.stop();
-        self.changed_output(|output| {
-            output.connected = false;
-            output.display_id = None;
-        });
+        if self.output().connected {
+            self.clear_output(None, true);
+        }
     }
     pub fn stop(&self) {
         self.stop_current(None);
     }
     pub(super) fn stop_current(&self, revision: Option<u64>) -> bool {
+        self.clear_output(revision, false)
+    }
+    fn clear_output(&self, revision: Option<u64>, disconnect: bool) -> bool {
         {
             let mut playback = self.playback.lock();
             let mut output = self.output.lock();
@@ -38,6 +65,11 @@ impl Core {
             playback.cancel();
             self.revoke(&output.slide);
             output.slide = Slide::welcome();
+            output.cleared = true;
+            if disconnect {
+                output.connected = false;
+                output.display_id = None;
+            }
             output.preparing = None;
             output.playing = false;
             output.position = 0.0;
@@ -66,6 +98,7 @@ impl Core {
             let mut output = self.output.lock();
             self.revoke(&output.slide);
             output.slide = slide.clone();
+            output.cleared = false;
             output.preparing = None;
             output.blackout = false;
             output.playing = false;
@@ -103,6 +136,7 @@ impl Core {
             let job = playback.begin(&hymn.id, position);
             self.revoke(&output.slide);
             output.slide = Slide::welcome();
+            output.cleared = false;
             output.preparing = Some(Preparation {
                 hymn_id: hymn.id.clone(),
                 title: format!("{} · {}", hymn.number, hymn.title),

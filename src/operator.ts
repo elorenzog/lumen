@@ -136,7 +136,12 @@ export async function operator(root:HTMLElement):Promise<void>{
       case 'program-up':case 'program-down':{const list=[...state.snapshot.program];const index=list.findIndex(p=>p.id===id);const target=index+(action==='program-up'?-1:1);const current=list[index];const other=list[target];if(current&&other){list[index]=other;list[target]=current;await updateProgram(list);}break;}
     }
   };
-  root.addEventListener('click',event=>{if(!(event.target instanceof Element))return;const button=event.target.closest<HTMLElement>('[data-action]');if(button&&!button.hasAttribute('disabled'))guarded(handle(button.dataset['action']??'',button.dataset['id'],button,event));});
+  root.addEventListener('click',event=>{
+    if(!(event.target instanceof Element))return;
+    const preview=event.target.closest<HTMLElement>('[data-base-screen-preview]');
+    if(preview){base.place(event,preview);return;}
+    const button=event.target.closest<HTMLElement>('[data-action]');if(button&&!button.hasAttribute('disabled'))guarded(handle(button.dataset['action']??'',button.dataset['id'],button,event));
+  });
   root.addEventListener('change',event=>{
     const target=event.target;if(!(target instanceof HTMLInputElement||target instanceof HTMLSelectElement))return;
     guarded((async()=>{
